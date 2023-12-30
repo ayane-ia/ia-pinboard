@@ -30,3 +30,28 @@
   .grid-item h3 {
     margin: 0;
   }
+
+  .titulo-mobile .titulo-m{
+    display: none;
+  }
+
+  @media screen and (max-width: 678px) {
+    .titulo-mobile {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      background: #f2f2f2;
+    }
+    .titulo-mobile .titulo-m{
+      width: 100%;
+      font-size: 30px;
+      padding: 10px;
+      display: block;
+      margin-top: 0;
+    }
+
+    .container-mae {
+      margin-top: 50px;
+      margin-bottom: 70px;
+    }
+  }
