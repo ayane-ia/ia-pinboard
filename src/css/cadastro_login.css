@@ -14,7 +14,7 @@ body {
 .container {
     width: 50%;
     background-color: #ffffffdc;
-    height: 95vh;
+    min-height: 95vh;
     margin: auto;
     border-radius: 20px;
 }
@@ -31,12 +31,13 @@ body {
 
 .container-inputs {
     width: 70%;
-    margin: auto;
+    margin: 50px auto;
 }
+
 
 .container-inputs label {
     display: block;
-    margin:auto;
+    margin: 10px auto;
     width: 70%;
 }
 
@@ -47,4 +48,29 @@ body {
     padding: 15px;
     border-radius: 20px;
     outline-color: aqua;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .form h2 {
+        font-size: 20px;
+    }
+
+    .container-inputs {
+        width: 99%;
+        margin: 0px auto;
+    }
+
+    .form {
+        
+        padding: 10px;
+    }
+
+    .p-form {
+        width: 80%;
+    }
 }
