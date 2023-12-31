@@ -1,0 +1,50 @@
+body {
+    background-image: url('../../public/images/PaginaInicialimg/personagemF15.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container {
+    width: 50%;
+    background-color: #ffffffdc;
+    height: 95vh;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.form h2 {
+    font-size: 30px;
+}
+
+.logo {
+    width: 50px;
+    border-radius: 50%;
+}
+
+
+.container-inputs {
+    width: 70%;
+    margin: auto;
+}
+
+.container-inputs label {
+    display: block;
+    margin:auto;
+    width: 70%;
+}
+
+.input-cadastro {
+    display: block;
+    margin: auto;
+    width: 70%;
+    padding: 15px;
+    border-radius: 20px;
+    outline-color: aqua;
+}
