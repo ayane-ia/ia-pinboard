@@ -82,6 +82,7 @@
     display: none;
   }
 
+
   @media screen and (max-width: 678px) {
     .menu {
       width: 100%;
