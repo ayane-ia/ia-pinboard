@@ -21,7 +21,7 @@
   .grid-item img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: zoom-in;
     filter: drop-shadow(0px 0px 10px rgba(99, 98, 98, 0.5));
     padding: 10px;
