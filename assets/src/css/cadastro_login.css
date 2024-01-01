@@ -1,0 +1,83 @@
+body {
+    background-image: url('../../public/images/PaginaInicialimg/personagemF15.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 50%;
+    background-color: #ffffffdc;
+    min-height: 95vh;
+    margin: auto;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.form h2 {
+    font-size: 30px;
+}
+
+.logo {
+    width: 50px;
+    border-radius: 50%;
+}
+
+
+.container-inputs {
+    width: 70%;
+    margin: 50px auto;
+}
+
+
+.container-inputs label {
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+}
+
+.input-cadastro {
+    display: block;
+    margin: auto;
+    width: 70%;
+    padding: 15px;
+    border-radius: 20px;
+    outline-color: aqua;
+    border: 1px solid white;
+}
+
+.preview {
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .form h2 {
+        font-size: 20px;
+    }
+
+    .container-inputs {
+        width: 99%;
+        margin: 0px auto;
+    }
+
+    .form {
+        
+        padding: 10px;
+    }
+
+    .p-form {
+        width: 80%;
+    }
+}

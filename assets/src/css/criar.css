@@ -1,0 +1,88 @@
+.container {
+    margin-top: 0;
+    min-height: calc(100vh - 85px);
+    position: relative;
+}
+
+ .titulo-upload {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+  }
+  
+  #upload-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 300px;
+    max-width: 360px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+
+.input-file {
+    width: 100%;
+}
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #image-preview {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #image-preview img {
+    border-radius: 10px;
+    max-width: 80%;
+    max-height: 300px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .container {
+        margin-top: 10px;
+        margin-bottom: 100px;
+        height: 90vh;
+    }
+
+    .titulo-upload {
+        text-align: center;
+        margin-top: 50px;
+      }
+  }
+
+
+  @media screen and (max-width: 340px) {
+    .container {
+        margin-top: 100px;
+        margin-bottom: 190px;
+        height: 90vh;
+    }
+
+    .titulo-upload {
+        text-align: center;
+        margin-top: 20px;
+      }
+  }
+
+
