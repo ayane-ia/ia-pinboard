@@ -81,3 +81,7 @@ body {
         width: 80%;
     }
 }
+
+#image-perfil {
+    display: none;
+}
