@@ -13,7 +13,11 @@ class CadastroController extends Controller{
                 $email      = $_POST["user_email"];
                 $pswd       = $_POST["user_password"];
                 $age        = $_POST["user_age"];
-                if($objUser->createUser($userName, $email, $pswd, $age)){ 
+                if($_FILES["user_image"]){
+                    
+                }
+                else $userImage = false;
+                if($objUser->createUser($userName, $email, $pswd, $age, $userImage)){ 
                     $url = URL_BASE."Login";
                     header("location: $url");
                 }

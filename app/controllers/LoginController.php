@@ -12,11 +12,17 @@ class LoginController extends Controller{
             if(isset($_POST["user_email"]) && isset($_POST["user_password"])){
                 $email  = $_POST["user_email"];
                 $pswd   = $_POST["user_password"];
-                if($objLogin->login($email, $pswd)){
+                if($objLogin->login($email, $pswd) == "user"){
                     if(vSession_start()) $_SESSION["user_email"] = trim($email);
-                    $url    = URL_BASE."home";
+                    $url    = URL_BASE."home/user";
                     header("location: $url");
-                }else{
+                }
+                elseif($objLogin->login($email, $pswd) == "adm"){
+                    if(vSession_start()) $_SESSION["adm_email"] = trim($email);
+                    $url    = URL_BASE."home/adm";
+                    header("location: $url");
+                }
+                else{
                     $data["error"] = true;
                 }
             }       

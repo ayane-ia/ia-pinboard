@@ -291,7 +291,7 @@ function insertDefault($cn, $tb, $clmn,$values)
     //$cn -> connection database ;$tb -> table; $clmn -> columnns 
     if(verifyInstanceDefault($cn, "*", $tb,$clmn,$values)!=false)
     {
-        die("functionsphp ERROR 1");
+        die("function INSERT ERROR 1");
     }
     $tmp1 = "";
     $t = 0;
@@ -424,6 +424,13 @@ function insertDefault($cn, $tb, $clmn,$values)
         return $ty[0]->max_value;
     }
 
+    function lastId($conn, $table){
+        $sql = "SELECT LAST_INSERT_ID FROM $table";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        return $query->fetch(\PDO::FETCH_OBJ);
+    }
+
     //LOGIN --- LOGIN
     function vLogin($cn,$tbl,$camp, $lg, $pswd)
     {   // verify login
@@ -545,12 +552,11 @@ function insertDefault($cn, $tb, $clmn,$values)
         // this function is limited for one file per send;
         // is recomend you create a const variable path
         // the $array_mime format must be like this -> [".png", ".zip"]
-        
         // verify the file
        $nome_arquivo = $input_file['name'];
        $tamanho_arquivo = $input_file['size'];
        $extensao = strchr(substr($input_file['name'], -5), ".");
-       $caminho_tmp =  $path_dest."\\".$nome_arquivo;
+       $caminho_tmp =  $path_dest.$nome_arquivo;
        if(!in_array($extensao,$array_mime))
        {    
            //invalid mime!

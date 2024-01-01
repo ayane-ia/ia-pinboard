@@ -1,13 +1,13 @@
-
 .container {
     margin-top: 0;
-    height: calc(100vh - 85px);
+    min-height: calc(100vh - 85px);
     position: relative;
 }
 
  .titulo-upload {
     text-align: center;
     margin-top: 100px;
+    margin-bottom: 40px;
   }
   
   #upload-form {
@@ -60,9 +60,9 @@
 
   @media screen and (max-width: 768px) {
     .container {
-        margin-top: 20px;
-        margin-bottom: 81px;
-        height: 100vh;
+        margin-top: 10px;
+        margin-bottom: 100px;
+        height: 90vh;
     }
 
     .titulo-upload {
@@ -70,4 +70,19 @@
         margin-top: 50px;
       }
   }
+
+
+  @media screen and (max-width: 340px) {
+    .container {
+        margin-top: 100px;
+        margin-bottom: 190px;
+        height: 90vh;
+    }
+
+    .titulo-upload {
+        text-align: center;
+        margin-top: 20px;
+      }
+  }
+
 

@@ -43,8 +43,7 @@ class Login extends Model{
                                     }
                                     $temp_email = implode("",$temp_email);
                                     if($temp_email == $adm->adm_email){
-                                        $url = URL_BASE;
-                                        header("location: $url");
+                                        return "adm";
                                     }
                                 }
                         }
@@ -53,7 +52,7 @@ class Login extends Model{
             }
         }
         $clmns = ["user_email", "user_password"];
-        if (Login_model($this->db,"user",$clmns,$email,$pswd)) return true;
+        if (Login_model($this->db,"user",$clmns,$email,$pswd)) return "user";
         else return false; 
     }
 }
