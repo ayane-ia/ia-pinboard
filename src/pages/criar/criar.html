@@ -26,7 +26,7 @@
               <li><a href="../../../public/index.html"><img class="icon-menus" src="../../../public/images/menu/casa.png" alt=""><span>Inicial</span></a></li>
               <li><a href=""><img class="icon-menus" src="../../../public/images/menu/pesquisar-arquivo.png" alt=""><span>Explorar</span></a></li>
               <li><a href="../../pages/criar/criar.html"><img class="icon-menus" src="../../../public/images/menu/adicionar.png" alt=""><span>criar</span></a></li>
-              <li><a href="../../pages/login_cadastro/cadastro.html"><img class="icon-menus" src="../../../public/images/menu/aplicativo-web.png" alt=""><span>Entrar</span></a></li>
+              <li><a href="../../pages/login_cadastro/login.html"><img class="icon-menus" src="../../../public/images/menu/aplicativo-web.png" alt=""><span>Entrar</span></a></li>
             </ul>
           </nav>
 </header>
@@ -39,16 +39,16 @@
     <form id="upload-form">
       <div>
         <label for="image-upload">Selecione uma imagem:</label>
-        <input class="btns004 style-display-block input-file" type="file" id="image-upload" accept="image/*">
+        <input class="btns004 style-display-block input-file" type="file" id="image-upload" accept="image/*" required>
       </div>
       <div>
           <div id="image-preview"></div>
         <label for="image-title">Título:</label>
-        <input type="text" id="image-title">
+        <input type="text" id="image-title" required>
       </div>
       <div>
         <label for="image-description">Descrição:</label>
-        <textarea id="image-description"></textarea>
+        <textarea id="image-description" required></textarea>
       </div>
       <div>
         <label for="image-category">Categoria:</label>
