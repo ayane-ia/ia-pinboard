@@ -6,19 +6,17 @@
       <div class="grid-container">
         <div class="grid-item">
             <img class="lazyload"   data-src="<?php echo URL_BASE."assets/"?>images/PaginaInicialimg/paisagem1.png" alt="Image 1" loading="lazy">
-          <span><h3>dono da post</h3></span>
         </div>
         <div class="grid-item">
           <img class="lazyload" data-src="<?php echo URL_BASE."assets/"?>images/PaginaInicialimg/paisagem2.png" alt="Image 2" loading="lazy">
-          <span><h3>dono da post</h3></span>
         </div>
         <div class="grid-item">
           <img class="lazyload" data-src="<?php echo URL_BASE."assets/"?>images/PaginaInicialimg/personagemF1.png" alt="Image 3" loading="lazy">
-          <span><h3>dono da post</h3></span>
+      
         </div>
         <div class="grid-item">
           <img class="lazyload" data-src="<?php echo URL_BASE."assets/"?>images/PaginaInicialimg/personagemF2.png" alt="Image 3" loading="lazy">
-          <span><h3>dono da post</h3></span>
+          
         </div>
        
         <!-- Adicione mais itens de grade conforme necessário -->

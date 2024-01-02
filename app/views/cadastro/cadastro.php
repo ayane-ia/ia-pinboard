@@ -10,23 +10,19 @@
   <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/cadastro_login.css">
 </head>
 <body>
+
+
   <div class="container">
 
     <div class="form">
 
-        <img class="logo style-display-block styleb-m-auto styleb-mb-2 styleb-mt-2"  src="../../../public/images/logo/logo.png" alt="">
+        <img class="logo style-display-block styleb-m-auto styleb-mb-2 styleb-mt-2"  src="<?php echo URL_BASE."assets/"?>images/logo/logo.png" alt="">
 
         <h2 class="styleb-text-center">Bem-vindo(a) ao AI Pinboard</h2>
         <p class="p-form styleb-m-auto styleb-mt-2 styleb-text-center styleb-w-1-3 ">Encontra novas ideias para experimentares</p>
 
         <form action="" method="post" enctype="multipart/form-data">
            <div class="container-inputs">
-
-            <div id="preview"></div>
-
-            <label for="image-perfil"></label>
-            <input type="file" name="user_image" id="image-perfil" accept="image/*" required>
-
             <label for="email">Nome</label>
             <input class="input-cadastro" type="text" name="user_name" id="email" placeholder="Seu nome" required>
 
