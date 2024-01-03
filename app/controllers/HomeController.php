@@ -9,6 +9,13 @@ class HomeController extends Controller{
         $this->load("template", $data);
    } 
    public function user(){
+         if(empty($_SESSION)){
+            session_start();
+            if(!isset($_SESSION["user_id"])){
+                  $url = URL_BASE;
+                  header("location: $url");
+            }
+         }
          $data["view"] = "user_logged/home";
          $this->load("user_logged/template", $data);
    }

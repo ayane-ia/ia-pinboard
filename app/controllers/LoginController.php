@@ -6,6 +6,7 @@ use app\models\User;
 
 class LoginController extends Controller{
    public function index(){
+    $objUser     = new User;
     $objLogin    = new Login;
     $data["error"] = false;
         if(isset($_POST)){
@@ -13,8 +14,8 @@ class LoginController extends Controller{
                 $email  = $_POST["user_email"];
                 $pswd   = $_POST["user_password"];
                 if($objLogin->login($email, $pswd) == "user"){
-                    if(vSession_start()) $_SESSION["user_email"] = trim($email);
-                    $url    = URL_BASE."home/user";
+                    if(vSession_start()) $_SESSION["user_id"] = $objUser->getUserIdByEmail($email)->user_id; 
+                    $url = URL_BASE."home/user";
                     header("location: $url");
                 }
                 elseif($objLogin->login($email, $pswd) == "adm"){

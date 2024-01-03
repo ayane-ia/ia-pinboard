@@ -1,10 +1,12 @@
 <?php 
 namespace app\models;
 use app\core\Model;
+use app\models\User;
 include_once "app/functions/funcoes.php";
 
 class Login extends Model{
     public function login($email,$pswd){
+        $objUser = new User;
         $email = trim($email);
         $ac = 0;
         for($i = 0; $i<=3; $i++){
@@ -52,7 +54,7 @@ class Login extends Model{
             }
         }
         $clmns = ["user_email", "user_password"];
-        if (Login_model($this->db,"user",$clmns,$email,$pswd)) return "user";
+        if (Login_model($this->db,"user",$clmns,$email,$pswd)) return true;
         else return false; 
     }
 }

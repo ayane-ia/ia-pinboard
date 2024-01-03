@@ -1,4 +1,4 @@
- 
+ <?php if($error){echo "<script>alert('O MESMO EMAIL JA ESTA CADASTRADO!')</script>";}?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

@@ -1,3 +1,4 @@
+<?php if($error) echo "<script>alert('CREDENCIAIS ERRADAS !')</script>";?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
