@@ -1,28 +1,30 @@
-<?php switch ($error) {
-  case 'notSend':
-    # code...
-    echo "<script>alert('ERRO AO ENVIAR!')</script>";
-  break;
-
-  case 'notDir':
+<?php if(isset($error)){
+  switch ($error) {
+    case 'notSend':
       # code...
       echo "<script>alert('ERRO AO ENVIAR!')</script>";
-  break;
-
-  case 'fatalError':
-    # code...
-    echo "<script>alert('ERRO AO ENVIAR!')</script>";
-  break;
-
-  case 'mime':
-    # extensao invalida
-    echo "<script>alert('EXTENSAO DA IMAGEM ERRADA !')</script>";
-  break;
-
-  case 'size':
-    # arquivo muito grande
-    echo "<script>alert('A IMAGEM EH MUITO GRANDE!')</script>";
-  break;
+    break;
+  
+    case 'notDir':
+        # code...
+        echo "<script>alert('ERRO AO ENVIAR!')</script>";
+    break;
+  
+    case 'fatalError':
+      # code...
+      echo "<script>alert('ERRO AO ENVIAR!')</script>";
+    break;
+  
+    case 'mime':
+      # extensao invalida
+      echo "<script>alert('EXTENSAO DA IMAGEM ERRADA !')</script>";
+    break;
+  
+    case 'size':
+      # arquivo muito grande
+      echo "<script>alert('A IMAGEM EH MUITO GRANDE!')</script>";
+    break;
+  }
 }?>
 <div class="container">
     <h1 class="titulo-upload">Upload de Imagem</h1>
