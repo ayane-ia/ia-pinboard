@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/menu.css">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/telainicial.css">
+    <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/criar.css">
     <title>AI Pinboard</title>
 </head>
 <body>

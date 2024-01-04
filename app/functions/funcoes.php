@@ -412,7 +412,7 @@ function insertDefault($cn, $tb, $clmn,$values)
     }
 
     // operations in database
-    function maxValue($conn, $param, $table,)
+    function maxValue($conn, $param, $table)
     {   // return the max value in the param max_value
         // $param is the you want return, type * for return all values in table
         // $typeReturn -> return OBJ or ARRAY, 1 or 2 
@@ -424,12 +424,27 @@ function insertDefault($cn, $tb, $clmn,$values)
         return $ty[0]->max_value;
     }
 
+    function maxValue_Equal($conn, $param, $table, $column, $value)
+    {   // return the max value in the param max_value
+        // $param is the you want return, type * for return all values in table
+        // $typeReturn -> return OBJ or ARRAY, 1 or 2 
+        // return * values of your table in fetchALL in obj format"
+        $sql = "SELECT MAX($param) as max_value FROM $table WHERE $column = :vl";
+        $query = $conn->prepare($sql);
+        $query->bindValue("vl", $value);
+        $query->execute();
+        $ty = $query->fetchALL(\PDO::FETCH_OBJ);
+        return $ty[0]->max_value;
+    }
+
     function lastId($conn, $table){
         $sql = "SELECT LAST_INSERT_ID FROM $table";
         $query = $conn->prepare($sql);
         $query->execute();
         return $query->fetch(\PDO::FETCH_OBJ);
     }
+
+
 
     //LOGIN --- LOGIN
     function vLogin($cn,$tbl,$camp, $lg, $pswd)
@@ -603,17 +618,17 @@ function insertDefault($cn, $tb, $clmn,$values)
        if(!in_array($extensao,$array_mime))
        {    
            //invalid mime!
-           return false; //die("the extension mime is invalid".substr($input_file['name'], -5));
+           return "error_mime"; //die("the extension mime is invalid".substr($input_file['name'], -5));
        }
        elseif($tamanho_arquivo > $max_size_file)
        {    
           // archive to much big
-           return false;
+           return "error_size";
        }
        elseif(file_exists($caminho_tmp))
        {   
             //the file exist
-           return false;
+           return "error_exists";
        }
        else
        {
