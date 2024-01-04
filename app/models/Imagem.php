@@ -8,6 +8,9 @@ class Imagem extends Model{
         $lista = selectAll($this->db, "categories", 1);
         return $lista;
     }
+    public function getAllImages(){
+        return selectAll($this->db, "images", 1);
+    }
     public function getNumberOfImages($id){
         $sql    = "SELECT COUNT(image_id) as temp FROM images WHERE image_authorId = $id";
         $query  = $this->db->prepare($sql);
@@ -33,14 +36,13 @@ class Imagem extends Model{
         else return true;
     }
     public function enviarImagem($image,$title, $userId, $desc, $ctg){
-
-        $id = $this->getNumberOfImages($userId) + 1;
-        $clmns          = ["image_name","image_title","image_authorId","image_category","image_description"];
-        $values         = ["user$userId"."image$id", $title, $userId, $ctg, $desc];
-           $tempFile        =   $image['tmp_name'];
-           $path_dest       =   USER_PATH."user$userId/"; // caminho de destino
-
-           $extensao = strchr(substr($image['name'], -5), "."); // pega a extensao
+        $extensao       = strchr(substr($image['name'], -5), "."); // pega a extensao
+        $id             = $this->getNumberOfImages($userId) + 1;
+        $path           = "user$userId/"."user$userId"."image$id".$extensao;
+        $clmns          = ["image_name","image_title","image_path","image_authorId","image_category","image_description"];
+        $values         = ["user$userId"."image$id", $title, $path, $userId, $ctg, $desc];
+        $tempFile       =   $image['tmp_name'];
+        $path_dest      =   USER_PATH."user$userId/"; // caminho de destino
 
            $image['name']   =   "user$userId"."image$id".$extensao; // seta um nome diferente
 
