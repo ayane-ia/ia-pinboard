@@ -39,7 +39,7 @@
 
            <button class="styleb-m-auto btns004 style-display-block styleb-mt-2 btn-upload-imagem" type="submit">Continuar</button>
 
-           <a class="styleb-m-auto style-display-block styleb-text-center styleb-mt-3 styleb-w-1-1" href="login.html">Fazer login</a>
+           <a class="styleb-m-auto style-display-block styleb-text-center styleb-mt-3 styleb-w-1-1" href="<?php echo URL_BASE."login"?>">Fazer login</a>
         </form>
 
     </div>
