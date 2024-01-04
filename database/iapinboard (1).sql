@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 01, 2024 at 06:46 AM
+-- Generation Time: Jan 04, 2024 at 08:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,6 +52,15 @@ CREATE TABLE `categories` (
   `category_image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category_name`, `category_image`) VALUES
+(1, 'Personagem', NULL),
+(2, 'Paisagem', NULL),
+(3, 'Mar', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -61,9 +70,19 @@ CREATE TABLE `categories` (
 CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
   `image_name` text NOT NULL,
-  `image_author` varchar(100) NOT NULL,
-  `image_category` varchar(100) NOT NULL
+  `image_title` varchar(255) NOT NULL,
+  `image_authorId` varchar(100) NOT NULL,
+  `image_category` varchar(90) DEFAULT NULL,
+  `image_description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`image_id`, `image_name`, `image_title`, `image_authorId`, `image_category`, `image_description`) VALUES
+(10, 'user137image1', 'batatao500', '137', '3', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
+(11, 'user137image2', 'imagem legal', '137', '2', 'muitas batatas ');
 
 -- --------------------------------------------------------
 
@@ -77,15 +96,18 @@ CREATE TABLE `user` (
   `user_email` varchar(200) NOT NULL,
   `user_password` varchar(70) NOT NULL,
   `user_level` int(11) DEFAULT NULL,
-  `user_age` date NOT NULL
+  `user_age` date NOT NULL,
+  `user_image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_level`, `user_age`) VALUES
-(3, 'teste', 'teste@gmail.com', '123', NULL, '2024-01-30');
+INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_level`, `user_age`, `user_image`) VALUES
+(137, 'Ayron', 'ayron@gmail.com', '123', NULL, '2024-01-05', NULL),
+(138, 'teste', 'teste@gmail.com', '123', NULL, '2024-01-12', NULL),
+(139, 'bluezao', 'bluezao@gmail.com', '123', NULL, '2004-01-07', NULL);
 
 --
 -- Indexes for dumped tables
@@ -129,19 +151,19 @@ ALTER TABLE `adm`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
