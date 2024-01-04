@@ -40,7 +40,7 @@ class UserController extends Controller{
          if(!is_string($verify)){
             $sendImage = $objImagem->enviarImagem($image,$title, $userId, $desc, $ctg);
             if($sendImage != false && !is_string($sendImage)){
-               header("location: ".URL_BASE);
+               header("location: ".URL_BASE."user");
             }elseif(is_string($sendImage)){
                $data["error"] = $sendImage;
             }else{
