@@ -6,6 +6,7 @@ use app\models\Imagem;
 class UserController extends Controller{
     
    public function index(){
+      $objImagem = new Imagem;
       if(empty($_SESSION)){
          session_start();
          if(!isset($_SESSION["user_id"])){
@@ -13,6 +14,8 @@ class UserController extends Controller{
                header("location: $url");
          }
       }
+      
+      $data["imagens"]      = $objImagem->getAllImages();
       $data["view"] = "user_logged/home";
       $this->load("user_logged/template", $data);
    }
