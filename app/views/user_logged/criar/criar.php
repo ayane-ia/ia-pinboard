@@ -1,27 +1,49 @@
+<?php switch ($error) {
+  case 'notSend':
+    # code...
+    echo "<script>alert('ERRO AO ENVIAR!')</script>";
+  break;
 
+  case 'notDir':
+      # code...
+      echo "<script>alert('ERRO AO ENVIAR!')</script>";
+  break;
 
-<h1 class="titulo-upload">Upload de Imagem</h1>
+  case 'fatalError':
+    # code...
+    echo "<script>alert('ERRO AO ENVIAR!')</script>";
+  break;
 
+  case 'mime':
+    # extensao invalida
+    echo "<script>alert('EXTENSAO DA IMAGEM ERRADA !')</script>";
+  break;
+
+  case 'size':
+    # arquivo muito grande
+    echo "<script>alert('A IMAGEM EH MUITO GRANDE!')</script>";
+  break;
+}?>
 <div class="container">
-  
+    <h1 class="titulo-upload">Upload de Imagem</h1>
 
-  <form id="upload-form" method="post" enctype="multipart/form-data">
-    <div>
-      <label for="image-upload">Selecione uma imagem:</label>
-      <input class="btns004 style-display-block input-file" type="file" name="image_file" id="image-upload" accept="image/*">
-    </div>
-    <div>
-        <div id="image-preview"></div>
-      <label for="image-title">Título:</label>
-      <input type="text" id="image-title" name="image_title">
-    </div>
-    <div>
-      <label for="image-description">Descrição:</label>
-      <textarea id="image-description" name="image_description"></textarea>
-    </div>
-    <div>
-      <label for="image-category">Categoria:</label>
-      <select id="image-category" name="image_category">
+    <form id="upload-form" method="post" enctype="multipart/form-data">
+      <div>
+        <label for="image-upload" class="label-upload-de-image label-pinboard">Adiciona imagem<img class="image-adiciona" src="<?php echo URL_BASE."assets/"?>images/menu/adicionar.png" alt=""></label>
+        <input class="input-file" name="image_file" type="file" id="image-upload" accept="image/*" required>
+      </div>
+      <div>
+          <div id="image-preview"></div>
+        <label for="image-title" class="label-pinboard">Título:</label>
+        <input class="border-inputs" name="image_title" type="text" id="image-title" required>
+      </div>
+      <div>
+        <label for="image-description" class="label-pinboard">Descrição:</label>
+        <textarea class="border-inputs" name="image_description" id="image-description" required></textarea>
+      </div>
+      <div>
+        <label for="image-category" class="label-pinboard">Categoria:</label>
+        <select class="select-pinboard" name="image_category" id="image-category">
         <?php if($categorias){ 
               foreach($categorias as $ct){
           ?>
@@ -29,13 +51,13 @@
 
         <?php }}else die("error");?>
         <option value="null" selected >Escolha</option>
-      </select>
-    </div>
-    <div>
-      <button class="btns005" type="submit">Enviar</button>
-    </div>
-  </form>
-  
-</div>
+        </select>
+      </div>
+      <div>
+        <button class="btns005" type="submit">Enviar</button>
+      </div>
+    </form>
+    
+  </div>
 
-<script src="<?php echo URL_BASE."assets/"?>scripts/criar.js"></script>
+  <script src="<?php echo URL_BASE."assets/"?>scripts/criar.js"></script>

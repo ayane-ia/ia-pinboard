@@ -1,24 +1,20 @@
 body {
-    background-image: url('../../images/PaginaInicialimg/personagemF15.png');
+    background-image: url('../../public/images/PaginaInicialimg/personagemF15.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
     display: flex;
-    padding: 10px;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
     min-height: 100vh;
 }
 
 .container {
     width: 50%;
     background-color: #ffffffdc;
-    min-height: 95vh;
-    margin: auto;
+    min-height: auto;
+    margin: 100px auto;
     border-radius: 20px;
-    padding: 10px;
 }
 
 .form h2 {
@@ -57,10 +53,19 @@ body {
     border-radius: 10px;
 }
 
-@media screen and (max-width: 768px) {
+.label-upload-de-image {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+  }
+
+@media screen and (max-width: 850px) {
     .container {
         width: 100%;
-        min-height: auto;
+        margin-top: 100px;
     }
 
     .form h2 {
@@ -79,5 +84,24 @@ body {
 
     .p-form {
         width: 80%;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .container {
+        width: 100%;
+        margin-top: 25px;
+        min-height: auto;
+        border-radius: 0;
+    }
+    
+
+}
+
+@media screen and (max-width: 340px) {
+    .container {
+        width: 100%;
+        margin-top: 0;
+        min-height: auto;
     }
 }

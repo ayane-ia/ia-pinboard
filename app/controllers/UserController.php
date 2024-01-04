@@ -33,8 +33,20 @@ class UserController extends Controller{
          $userId  = $_SESSION["user_id"];
          $ctg     = $_POST["image_category"];
          $desc    = $_POST["image_description"];
-         if($objImagem->enviarImagem($image,$title, $userId, $desc, $ctg)) echo "<scrpit>Enviado com Sucesso!<scpript>";
-         else echo "<scprit>error ao enviar !</script>";
+         $verify  = $objImagem->verifyImage($image,$userId);
+         if(!is_string($verify)){
+            $sendImage = $objImagem->enviarImagem($image,$title, $userId, $desc, $ctg);
+            if($sendImage != false && !is_string($sendImage)){
+               header("location: ".URL_BASE);
+            }elseif(is_string($sendImage)){
+               $data["error"] = $sendImage;
+            }else{
+               $data["error"] = "fatalError";
+            }
+         }
+         else{
+            $data["error"] = $verify;
+         }
       }
       $data["view"] = "user_logged/criar/criar";
       $this->load("user_logged/template", $data);

@@ -1,0 +1,16 @@
+.scimg-section-container {
+  height: 100vh;
+  color: black;
+  background-color: white;
+}
+
+.scimg-section-container h3 {
+  color: black;
+}
+
+@media screen and (max-width: 678px) {
+    .scimg-section {
+        column-count: 2;
+      }
+
+}
