@@ -6,12 +6,7 @@
 
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 5px;
-    padding-top: 20px;
-    
-    
+    columns: 4;
   }
   
   .grid-item {
@@ -25,6 +20,7 @@
     cursor: zoom-in;
     filter: drop-shadow(0px 0px 10px rgba(99, 98, 98, 0.5));
     padding: 10px;
+    margin: 0;
   }
 
 
@@ -32,12 +28,29 @@
     display: none;
   }
 
+
+  @media screen and (max-width: 990px) {
+
+    
+    .grid-container {
+      columns: 3;
+    }
+
+
+   }
+
   @media screen and (max-width: 490px) {
+
+
 
     .container-mae {
       width: 100%;
     }
 
+
+    .grid-container {
+      columns: 2;
+    }
 
     .titulo-mobile {
       width: 100%;
@@ -59,7 +72,4 @@
       margin-bottom: 100px;
     }
 
-    .grid-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }

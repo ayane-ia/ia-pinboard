@@ -57,6 +57,7 @@
       </div>
       <div>
         <button class="btns005" type="submit">Enviar</button>
+        <a class="btns005" href="https://poe.com/AI_Pinboard" target="_blank">Criar imagem com IA</a>
       </div>
     </form>
     
