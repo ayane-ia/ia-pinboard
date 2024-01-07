@@ -64,5 +64,23 @@ class Imagem extends Model{
             }
         
     }
+    public function getCategoryIdByName($name){
+
+    }
+
+    public function getImagesPerCategory($categoryName){
+         
+        $sql  = "SELECT category_id FROM categories as ct WHERE ct.category_name = :vl";
+        $qry  = $this->db->prepare($sql);
+        $qry->bindValue(":vl", $categoryName);
+        $qry->execute();
+        $id = $qry->fetch(\PDO::FETCH_OBJ);
+        $id = $id->category_id;
+         
+        $sql  = "SELECT * FROM images as im WHERE im.image_category = $id";
+        $qry  = $this->db->prepare($sql);
+        $qry->execute();
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
 }
 ?>

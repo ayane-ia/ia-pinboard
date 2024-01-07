@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/telainicial.css">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/criar.css">
     <link rel="shortcut icon" href="<?php echo URL_BASE."assets/"?>images/logo/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/explorar.css">
     <title>AI Pinboard</title>
 </head>
 <body>
-<?php include_once "elements/menu.php" ?>
+<?php vSession_start(); if(isset($_SESSION["user_id"])){include_once "elements/menu.php";}
+else{include_once "app/views/elements/menu.php";}
+?>
 
 <?php $this->load($view, $viewData);?>
 

@@ -7,10 +7,17 @@
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/menu.css">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/telainicial.css">
     <link rel="shortcut icon" href="<?php echo URL_BASE."assets/"?>images/logo/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/explorar.css">
     <title>AI Pinboard</title>
 </head>
 <body>
-<?php include_once "elements/menu.php" ?>
+<?php 
+session_start();
+if($_SESSION){
+    if(isset($_SESSION["user_id"])) include_once "user_logged/elements/menu.php";
+    else  include_once "elements/menu.php";
+}else  include_once "elements/menu.php";
+?>
 
 <?php $this->load($view, $viewData);?>
 

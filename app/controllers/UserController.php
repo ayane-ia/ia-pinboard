@@ -54,5 +54,4 @@ class UserController extends Controller{
       $data["view"] = "user_logged/criar/criar";
       $this->load("user_logged/template", $data);
    }
- 
 }
