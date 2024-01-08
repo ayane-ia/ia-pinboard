@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 04, 2024 at 08:52 PM
+-- Generation Time: Jan 08, 2024 at 02:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -71,6 +71,7 @@ CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
   `image_name` text NOT NULL,
   `image_title` varchar(255) NOT NULL,
+  `image_path` text NOT NULL,
   `image_authorId` varchar(100) NOT NULL,
   `image_category` varchar(90) DEFAULT NULL,
   `image_description` text DEFAULT NULL
@@ -80,9 +81,10 @@ CREATE TABLE `images` (
 -- Dumping data for table `images`
 --
 
-INSERT INTO `images` (`image_id`, `image_name`, `image_title`, `image_authorId`, `image_category`, `image_description`) VALUES
-(10, 'user137image1', 'batatao500', '137', '3', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
-(11, 'user137image2', 'imagem legal', '137', '2', 'muitas batatas ');
+INSERT INTO `images` (`image_id`, `image_name`, `image_title`, `image_path`, `image_authorId`, `image_category`, `image_description`) VALUES
+(23, 'user137image4', 'imagem legal', 'user137/user137image4.png', '137', '2', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(24, 'user137image2', 'Imagem de Teste', 'user137/user137image2.png', '137', '1', 'lorem ipsum'),
+(25, 'user137image3', 'bluzao', 'user137/user137image3.jpg', '137', '2', 'aaaaaaaaaa');
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_level`, `user_age`, `user_image`) VALUES
 (137, 'Ayron', 'ayron@gmail.com', '123', NULL, '2024-01-05', NULL),
 (138, 'teste', 'teste@gmail.com', '123', NULL, '2024-01-12', NULL),
-(139, 'bluezao', 'bluezao@gmail.com', '123', NULL, '2004-01-07', NULL);
+(139, 'bluezao', 'bluezao@gmail.com', '123', NULL, '2004-01-07', NULL),
+(140, 'novo', 'ayano@gmail.com', '123', NULL, '2024-01-27', NULL);
 
 --
 -- Indexes for dumped tables
@@ -157,13 +160,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
