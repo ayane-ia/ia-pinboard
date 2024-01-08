@@ -10,5 +10,5 @@ define('CONTROLLER_PADRAO', 'home');
 define('METODO_PADRAO', 'index');
 define('NAMESPACE_CONTROLLER', 'app\\controllers\\');
 
-define('URL_BASE', 'http://localhost/projetos/ia-pinboard/');
-define('USER_PATH', '/opt/lampp/htdocs/projetos/ia-pinboard/userData/');
+define('URL_BASE', 'http://localhost/ia-pinboard/');
+define('USER_PATH', 'C:\xampp\htdocs\ia-pinboard\userData\\');
