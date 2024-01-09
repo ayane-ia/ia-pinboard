@@ -7,6 +7,7 @@
          <div class="card fundo-0">
            <h2><?php echo $ct->category_name?></h2>
          </div>
+
   </a>
 <?php } ?>
 

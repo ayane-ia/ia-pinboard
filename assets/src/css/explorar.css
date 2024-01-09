@@ -34,26 +34,12 @@
 }
 
 .fundo-0 {
-    background-image: url('../../public/images/fundopc/fundoPC26.png');
+    background-image: url('../../images/paisagens/paisagens23.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.fundo-1 {
-    background-image: url('../../public/images/paisagens/Paisagens1.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
-.fundo-2 {
-    background-image: url('../../public/images/personagens/personagens1.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
 .card h2 {
     background-color: rgba(0, 0, 0, 0.384);

@@ -128,8 +128,30 @@ body {
     align-items: center;
 }
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 599px) {
     .div-container {
         margin-top: 0px;
     }
+
+    .div-container-conteudo-imagem-de-perfil {
+        flex-direction: column;
+    }
+
+
+    .container-imagem-editar {
+        flex-direction: column;
+    }
+
+    .nome-do-usuario-editar-perfil {
+        margin-left: 0;
+        text-align: center;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 379px) {
+    .div-container {
+       margin-bottom: 90px;
+    }
+
 }
