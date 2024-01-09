@@ -41,5 +41,36 @@ class User extends Model{
     public function getUserIdByEmail($email){
         return selectOnceEqual($this->db,"user_id","user","user_email",$email,1);
     }
+    public function getUserIdByName($name){
+        return  selectOnceEqual($this->db,"user_id","user","user_name",$name,1);
+    }
+    public function getUserInfo($arr, $id){
+        $sql = "SELECT * FROM user WHERE user_id = $id";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        $data = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        if(is_array($arr)){
+            $return = [];
+            for ($i=0; $i < (count($arr)); $i++) { 
+                $return[$arr[$i]] = $data[0][$arr[$i]];
+            }
+            return $return;
+        }
+        else return $data[0][$arr];
+    }
+    public function isUser($name){
+        $userTrue = selectOnceEqual($this->db,"user_name","user","user_name",$name,1);
+        $userTrue = strtolower($userTrue->user_name);
+        if($name == $userTrue) return true;
+        else return false;
+    }
+    public function follow($userToFollow, $currentUserId){
+        $userToFollow_id = selectOnceEqual($this->db,"user_id","user","user_name", $userToFollow, 1);
+        $userToFollow_id = $userToFollow_id->user_id;
+
+        #PAREI AQUI !!!!
+    }
 }
 ?>

@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/telainicial.css">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/criar.css">
     <link rel="shortcut icon" href="<?php echo URL_BASE."assets/"?>images/logo/logo.ico" type="image/x-icon">
+    
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/explorar.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo URL_BASE."assets/"?>src/css/editarperfil.css">
+    <link rel="stylesheet" type="text/css" href="/ia-pinboard/assets/src/css/editarperfil.css">
+    <link rel="stylesheet" type="text/css" href="/ia-pinboard/assets/src/css/editarperfiluser.css">
     <title>AI Pinboard</title>
 </head>
 <body>

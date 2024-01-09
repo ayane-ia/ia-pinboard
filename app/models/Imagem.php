@@ -82,5 +82,9 @@ class Imagem extends Model{
         $qry->execute();
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function getImagesByUser($user_id){
+        return selectAll_equal($this->db,"images","image_authorId",$user_id);
+    }
 }
 ?>
