@@ -1,119 +1,124 @@
-.imagem-sobre {
-    width: 100%;
-    height: 400px;
-    margin-top: 90px;
-    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.imagem-sobre .sobre img {
+.container-imagem-tema {
+  width: 80%;
+  min-height: 300px;
+  background-color: aqua;
+  margin: auto;
+  padding: 10px;
+}
+
+.img-image-tema {
+  display: block;
   width: 400px;
+  height: 400px;
+  margin: auto;
+  border-radius: 30px;
+}
+
+.gostou {
+  width: 150px;
+  margin: auto;
+  padding: 10px;
+  background-color: blanchedalmond;
+}
+
+.gostou-coracao {
   display: block;
   margin: auto;
+  font-size: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+}
+
+.numerodegostei {
+  font-size: 30px;
+}
+
+.gostou-coracao:hover {
+  transform: scale(1.2);
+}
+
+.usuario-que-postou {
+  display: flex;
+  width: 80%;
+  background-color: aquamarine;
+  margin: auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.imagem-perfil-img {
+  width: 80px;
+  border-radius: 50%;
+}
+
+.nome-do-usuario {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btns005 {
+  cursor: pointer;
+}
+
+.comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  margin: auto;
+  background: burlywood;
+  max-height: 400px;
+  overflow: auto;
+}
+
+
+.comentario-digitado {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 17px;
+}
+
+.imagem-do-usuario-comentario {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.comentariodousuario {
+  overflow: auto;
+  max-height: 200px;
+  padding: 20px;
+  background-color: rgba(220, 217, 224, 0.89);
   border-radius: 20px;
 }
 
-.sobre {
-    width: 470px;
+@media screen and (max-width: 490px) {
+  .container-imagem-tema {
+    width: 100%;
+
+  }
+  .img-image-tema {
+    width: 100%;
     height: auto;
-    margin: auto;
-    background-color: red;
-}
+  }
 
 
 
-.usuario-da-imagem {
-    width: 100%;  
-}
-
-.titulo-da-imagem {
-    font-size: 20px;
-    margin-top: 30px;
-    margin-left: 30px;
-}
-
-.descricao-imagem {
-    font-size: 17px;
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-bottom: 10px
-}
-
-.div-usuario {
+  .usuario-que-postou {
     width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.usuario-da-imagem .div-usuario h3 {
-    text-align: left;
-}
-
-.usuario-da-imagem .div-usuario .btn-seguir {
-    margin-left: 20px;
-}
-
-
-.btn-seguir {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    background-color: #ff9900;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-seguir:hover {
-    background-color: #ff6600;
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .btn-seguir:active {
-    background-color: #ff3300;
-  }
-  
-  .btn-seguir:focus {
-    outline: none;
-  }
-  
-  .btn-seguir:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .btn-seguir.loading:before {
-    animation: spin 1s infinite linear;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 
-.usuario-da-imagem .div-usuario img {
-    width: 80px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 50%;
-}
-
-.comentarios-imagem {
+  .comentarios {
     width: 100%;
-    height: 200px;
-    background-color: rebeccapurple;
-}
+    padding: 10px;
+  }
 
-.titulo-comentario {
-    font-size: 20px;
-    margin-left: 20px;
-    padding: 20px;
 }
