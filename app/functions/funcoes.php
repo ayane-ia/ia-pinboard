@@ -297,7 +297,7 @@ function insertDefault($cn, $tb, $clmn,$values)
     //$cn -> connection database ;$tb -> table; $clmn -> columnns 
     if(verifyInstanceDefault($cn, "*", $tb,$clmn,$values)!=false)
     {
-        die("function INSERT ERROR 1");
+        return false;
     }
     $tmp1 = "";
     $t = 0;
@@ -449,7 +449,14 @@ function insertDefault($cn, $tb, $clmn,$values)
         $query->execute();
         return $query->fetch(\PDO::FETCH_OBJ);
     }
+    function countAll($conn, $table, $param, $column, $vle){
+        $sql = "SELECT COUNT($param) as total FROM $table AS tb WHERE tb.$column = $vle";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        $temp = $query->fetch(\PDO::FETCH_OBJ);
 
+        return $temp->total;
+    }
 
 
     //LOGIN --- LOGIN

@@ -1,21 +1,45 @@
-<?php if(!$_SESSION){session_start();} print_r($_SESION);?>
+
+<?php 
+
+if(empty($_SESSION)) session_start();
+
+if(isset($_SESSION["error"]["unfollow"])){
+  echo "<script>alert('Erro ao deixar de seguir')</script>";
+  unset($_SESSION["error"]["unfollow"]);
+}
+  if(isset($_SESSION["error"]) && $_SESSION["error"]["exists"] == true){
+  echo "<script>alert('Erro ao seguir')</script>";
+  unset($_SESSION["error"]);
+}
+
+
+?>
+
 <main>
     <div class="profile">
       <img src="<?php echo URL_BASE?>assets/images/logo/logo.png" alt="Foto de Perfil">
       <h2><?php echo $user_name?></h2>
       <p><?php echo $user_bio?></p>
       <ul>
-        <li><strong>Seguidores:</strong> <?php echo $user_followers?></li>
-        <li><strong>Seguindo:</strong> <?php echo $user_following?></li>
-        <li><strong>Publicações:</strong> <?php echo $user_publications?></li>
+        <li><strong>Seguidores:</strong> <?php echo $followers?></li>
+        <li><strong>Seguindo:</strong> <?php echo $following?></li>
+        <li><strong>Publicações:</strong> <?php echo $publications?></li>
       </ul>
+
       <?php if(isset($edit)) { // A variavael $edit carrega o id do usuario?>
         <!--Foi verificado que o usuario esta vendo seu perfil, então o botao e editar aparecera!-->
-        <a href="<?php echo URL_BASE."user/edit"?>"><button class="btns005">Editar perfil</button></a>
-      <?php }else { ?>
-        <a href="<?php echo URL_BASE."profile/follow/$user_name"?>"><button class="btns005">Seguir</button></a>
-      <?php   }?>
 
+        <a href="<?php echo URL_BASE."user/edit"?>"><button class="btns005">Editar perfil</button></a>
+
+      <?php } elseif(isset($following)) { ?>
+
+        <a href="<?php echo URL_BASE."profile/unfollow/$user_name"?>"><button class="btns005">Deixar de seguir</button></a>
+        
+      <?php  } elseif(!isset($following)){ ?>
+
+        <a href="<?php echo URL_BASE."profile/follow/$user_name"?>"><button class="btns005">Seguir</button></a>
+
+      <?php  } ?>
     </div>
   </main>
 

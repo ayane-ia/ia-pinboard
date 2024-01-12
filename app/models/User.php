@@ -71,28 +71,84 @@ class User extends Model{
         if($name == $userTrue) return true;
         else return false;
     }
-    public function userIsFollowing($currentUserId, $userToKnow){
-        $sql = "SELECT * FROM following as fl WHERE fl.followed = :fl  AND fl.follower = :utk ";
+    public function userIsFollowing($userToKnow,$currentUserId){
+
+        if(is_string($currentUserId)){
+            $currentUserId = $this->getUserIdByName($currentUserId);
+            $currentUserId = $currentUserId->user_id;
+        }
+        if(is_string($userToKnow)) { $userToKnow = $this->getUserIdByName($userToKnow);
+            $userToKnow = $userToKnow->user_id;
+        } 
+
+        $sql = "SELECT * FROM following WHERE following.follower = $userToKnow AND following.followed = $currentUserId";
         $qry = $this->db->prepare($sql);
-        $qry->bindValue(":fl", $currentUserId);
-        $qry->bindValue(":utk", $userToKnow);
         $qry->execute();
 
         $temp = $qry->fetch(\PDO::FETCH_OBJ);
-        if(!$temp) return false;
 
+        if(!$temp) return false;
         return $temp;
     }
 
-    public function follow($userIdToFollow, $currentUserId){
-        $temp = $this->userIsFollowing($userIdToFollow,$currentUserId);
-        if($temp == true) return false;
-        if(insertDefault($this->db,"following",["follower","followed"],[$userIdToFollow,$currentUserId])) return true;
-        else return false;
+    public function follow($userToFollow, $currentUserId){
+        $temp = $this->userIsFollowing($userToFollow,$currentUserId);
+        if($temp == true) return "isFollowing";
+
+        $userIdToFollow = $this->getUserIdByName($userToFollow);
+        if(!$userIdToFollow) return false;
+        $userIdToFollow = $userIdToFollow->user_id;
+
+        $clmn = ["follower","followed"];
+        $vle  = [$userIdToFollow, $currentUserId];
+        if(insertDefault($this->db, "following",$clmn,$vle)) return true;
+        else return "exists";
     }
+
     public function getUserNameById($id){
         $return = selectOnceEqual($this->db,"user_name","user","user_id",$id,1);
         return $return->user_name;
+    }
+
+    public function unFollow($user, $currentUserId){
+        $userId = $this->getUserIdByName($user);
+
+        $userId = $userId->user_id;
+        $sql = "DELETE  FROM following  WHERE following.follower = :user AND following.followed = :currentUser";
+        $qry = $this->db->prepare($sql);
+        $qry->bindValue(":user", $userId);
+        $qry->bindValue(":currentUser", $currentUserId);
+        if($qry->execute()) return true;
+        else return false;
+
+    }
+    public function getfollowersByUserId($name){
+            if(is_string($name)){ 
+            $name = $this->getUserIdByName($name);
+            $name = $name->user_id;
+        }
+        $count = countAll($this->db,"following","*","follower",$name);
+        if($count) return $count;
+        else return false;
+    }
+    public function getFollowingByUserId($name){
+        if(is_string($name)){ 
+            $name = $this->getUserIdByName($name);
+            $name = $name->user_id;
+        }
+        $count = countAll($this->db,"following","*","followed",$name);
+        if($count) return $count;
+        else return false;
+    }
+    public function getNumOfPubliByUserId($name){
+        if(is_string($name)){ 
+            $name = $this->getUserIdByName($name);
+            $name = $name->user_id;
+        }
+
+        $count = countAll($this->db,"images","*","image_authorId",$name);
+        if($count) return $count;
+        else return false;
     }
 }
 ?>
