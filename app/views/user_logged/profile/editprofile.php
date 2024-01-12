@@ -10,7 +10,6 @@
                 <div class="container-imagem-editar">
                     <img class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/logo/logo.png" alt="">
 
-                    <span class="nome-do-usuario-editar-perfil"><strong>Usuario</strong></span>
                 </div>
 
                 <span class="span-edita-perfil btns005">Alterar foto</span>

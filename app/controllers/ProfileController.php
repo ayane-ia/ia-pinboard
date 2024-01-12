@@ -14,13 +14,10 @@ class ProfileController extends Controller{
             $name       = $_GET["user"];
             if($objUser->isUser($name) == false) header("location: ".URL_BASE); 
             $user_id    = $objUser->getUserIdByName($name);
-            if(empty($_SESSION)){
-                session_start();
-            }else{
-                if(isset($_SESSION["user_id"]) && $user_id->user_id == $_SESSION["user_id"]){
-                    $data["edit"] = true;
-                }
-            }
+            if(empty($_SESSION)) session_start();
+                
+            if(isset($_SESSION["user_id"]) && $user_id->user_id == $_SESSION["user_id"]) $data["edit"] = true;
+
         }else header("location: ".URL_BASE);
         $id     = $objUser->getUserIdByName($_GET["user"]);
         $id     = $id->user_id;
@@ -36,7 +33,6 @@ class ProfileController extends Controller{
         if(isset($dados["user_publications"])) $data["user_publications"]   = $dados["user_publications"]; else $data["user_publications"] = 0;
 
         $data["view"]       = "profile/profilevisited";
-
         $this->load("template", $data);
    }
    public function follow($user){
@@ -44,7 +40,9 @@ class ProfileController extends Controller{
     $objImagem      = new Imagem;
 
     if($objUser->isUser($user) == false) header("location: ".URL_BASE);
-
+    if($objUser->follow($user,$_SESSION["user_id"])){ 
+        header("location: ".URL_BASE."profile/?user=$user");
+    }
     //$objUser->follow($user);
 
    }

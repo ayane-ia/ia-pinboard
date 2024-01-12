@@ -1,3 +1,4 @@
+<?php if(!$_SESSION){session_start();} print_r($_SESION);?>
 <main>
     <div class="profile">
       <img src="<?php echo URL_BASE?>assets/images/logo/logo.png" alt="Foto de Perfil">

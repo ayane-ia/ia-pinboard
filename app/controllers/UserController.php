@@ -65,8 +65,9 @@ class UserController extends Controller{
       if(!isset($_SESSION["user_id"])) header("location: ".URL_BASE);
       
       $dados = $objUser->getUserInfo(["user_name", "user_bio"], $_SESSION["user_id"]);
-      $data["name"] = $dados[0];
-      
+      $data["name"] = $dados["user_name"];
+      $data["bio"] = $dados["user_bio"];
+
       if(is_string($dados[1])) $data["bio"] = $dados[1];
       
       $data["view"]         = "user_logged/profile/editprofile";

@@ -56,12 +56,14 @@ class User extends Model{
             for ($i=0; $i < (count($arr)); $i++) { 
                 $return[$arr[$i]] = $data[0][$arr[$i]];
             }
+            //die(print_r($return));
             return $return;
         }
         else return $data[0][$arr];
     }
     public function isUser($name){
         $userTrue = selectOnceEqual($this->db,"user_name","user","user_name",$name,1);
+        if(!$userTrue) return false;
         $user = $userTrue->user_name;
         
         if($user == $name) return true;
@@ -69,11 +71,24 @@ class User extends Model{
         if($name == $userTrue) return true;
         else return false;
     }
-    public function follow($userToFollow, $currentUserId){
-        $userToFollow_id = selectOnceEqual($this->db,"user_id","user","user_name", $userToFollow, 1);
-        $userToFollow_id = $userToFollow_id->user_id;
+    public function userIsFollowing($currentUserId, $userToKnow){
+        $sql = "SELECT * FROM following as fl WHERE fl.followed = :fl  AND fl.follower = :utk ";
+        $qry = $this->db->prepare($sql);
+        $qry->bindValue(":fl", $currentUserId);
+        $qry->bindValue(":utk", $userToKnow);
+        $qry->execute();
 
-        #PAREI AQUI !!!!
+        $temp = $qry->fetch(\PDO::FETCH_OBJ);
+        if(!$temp) return false;
+
+        return $temp;
+    }
+
+    public function follow($userIdToFollow, $currentUserId){
+        $temp = $this->userIsFollowing($userIdToFollow,$currentUserId);
+        if($temp == true) return false;
+        if(insertDefault($this->db,"following",["follower","followed"],[$userIdToFollow,$currentUserId])) return true;
+        else return false;
     }
     public function getUserNameById($id){
         $return = selectOnceEqual($this->db,"user_name","user","user_id",$id,1);
