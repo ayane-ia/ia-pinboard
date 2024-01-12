@@ -15,7 +15,12 @@ class LoginController extends Controller{
                 $email  = $_POST["user_email"];
                 $pswd   = $_POST["user_password"];
                 if($objLogin->login($email, $pswd) == "user"){
-                    if(vSession_start()) $_SESSION["user_id"] = $objUser->getUserIdByEmail($email)->user_id; 
+                    if(vSession_start()){ 
+                        
+                        $_SESSION["user_id"] = $objUser->getUserIdByEmail($email)->user_id;
+                        $_SESSION["user_name"] = $objUser->getUserNameById($_SESSION["user_id"]);
+                    } 
+
                     $url = URL_BASE."user";
                     header("location: $url");
                 }

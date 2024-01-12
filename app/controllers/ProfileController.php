@@ -45,7 +45,7 @@ class ProfileController extends Controller{
 
     if($objUser->isUser($user) == false) header("location: ".URL_BASE);
 
-    $objUser->follow($user);
+    //$objUser->follow($user);
 
    }
 }

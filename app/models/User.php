@@ -62,6 +62,9 @@ class User extends Model{
     }
     public function isUser($name){
         $userTrue = selectOnceEqual($this->db,"user_name","user","user_name",$name,1);
+        $user = $userTrue->user_name;
+        
+        if($user == $name) return true;
         $userTrue = strtolower($userTrue->user_name);
         if($name == $userTrue) return true;
         else return false;
@@ -71,6 +74,10 @@ class User extends Model{
         $userToFollow_id = $userToFollow_id->user_id;
 
         #PAREI AQUI !!!!
+    }
+    public function getUserNameById($id){
+        $return = selectOnceEqual($this->db,"user_name","user","user_id",$id,1);
+        return $return->user_name;
     }
 }
 ?>

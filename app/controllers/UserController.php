@@ -4,7 +4,7 @@ use app\core\Controller;
 use app\models\Imagem;
 use app\models\User;
 
-use function PHPSTORM_META\type;
+//use function PHPSTORM_META\type;
 
 class UserController extends Controller{
     
@@ -58,6 +58,7 @@ class UserController extends Controller{
       $this->load("user_logged/template", $data);
    }
    public function edit(){
+      
       $objImagem = new Imagem;
       $objUser = new User;
       if(empty($_SESSION)) session_start();
@@ -65,10 +66,11 @@ class UserController extends Controller{
       
       $dados = $objUser->getUserInfo(["user_name", "user_bio"], $_SESSION["user_id"]);
       $data["name"] = $dados[0];
-
+      
       if(is_string($dados[1])) $data["bio"] = $dados[1];
       
       $data["view"]         = "user_logged/profile/editprofile";
       $this->load("template", $data);
+
      }
 }
