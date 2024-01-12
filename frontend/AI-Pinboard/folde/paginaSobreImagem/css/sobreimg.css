@@ -1,119 +1,202 @@
-.imagem-sobre {
-    width: 100%;
-    height: 400px;
-    margin-top: 90px;
-    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.imagem-sobre .sobre img {
-  width: 400px;
-  display: block;
+.container-imagem-tema {
+  width: 80%;
+  min-height: 300px;
   margin: auto;
+  padding: 10px;
+}
+
+.img-image-tema {
+  display: block;
+  width: 60%;
+  margin: auto;
+  border-radius: 30px;
+}
+
+.sobre-img {
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+}
+
+.titulo-img {
+  text-align: center;
+  font-size: 25px;
+}
+
+.descricao-img {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+
+
+.content {
+  width: 150px;
+  border: 2px solid #ccc;
+  padding: 13px 16px;
+  border-radius: 5px;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+}
+
+.content .heart {
+  height: 90px;
+  width: 90px;
+  background: url('../../../../../assets/images/recursos/likecoracao.png') no-repeat;
+  background-position: left;
+  background-size: 2900%;
+  position: absolute;
+  top: 50%;
+  left: 21%;
+  transform: translate(-50%, -50%);
+}
+
+.heart:hover {
+  background-position: right;
+  animation: animate .8s steps(28) 1;
+}
+
+.text {
+  margin-left: 30px;
+  font-size: 21px;
+  color: rgb(0, 0, 0);
+}
+
+.numb {
+  font-size: 21px;
+  color: rgb(0, 0, 0);
+  margin-left: 7px
+}
+
+.heart.heart-active{
+  animation: animate .8s steps(28) 1;
+  background-position: right;
+}
+
+@keyframes animate {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+
+
+.digita-comentario form {
+  display: flex;
+  gap: 10px;
+}
+
+.comentario-textarea {
+  width: 70%;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  resize: none;
+  text-align: center;
+  outline-color: blanchedalmond;
+}
+
+
+
+
+
+.usuario-que-postou {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.imagem-perfil-img {
+  width: 80px;
+  border-radius: 50%;
+}
+
+.nome-do-usuario {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btns005 {
+  cursor: pointer;
+}
+
+
+.pai-container-comentario {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+.comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  margin: auto;
+  max-height: 400px;
+  overflow: auto;
+  padding: 10px;
+}
+
+.comentario-digitado {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 17px;
+}
+
+.imagem-do-usuario-comentario {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.comentariodousuario {
+  overflow: auto;
+  max-height: 200px;
+  padding: 20px;
+  background-color: rgba(220, 217, 224, 0.89);
   border-radius: 20px;
 }
 
-.sobre {
-    width: 470px;
+@media screen and (max-width: 490px) {
+  .container-imagem-tema {
+    width: 100%;
+
+  }
+  .img-image-tema {
+    width: 100%;
     height: auto;
-    margin: auto;
-    background-color: red;
-}
+  }
 
 
 
-.usuario-da-imagem {
-    width: 100%;  
-}
-
-.titulo-da-imagem {
-    font-size: 20px;
-    margin-top: 30px;
-    margin-left: 30px;
-}
-
-.descricao-imagem {
-    font-size: 17px;
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-bottom: 10px
-}
-
-.div-usuario {
+  .usuario-que-postou {
     width: 100%;
-    display: flex;
+  }
+
+  .comentarios {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .digita-comentario form {
+    flex-direction: column;
     align-items: center;
-}
-
-.usuario-da-imagem .div-usuario h3 {
-    text-align: left;
-}
-
-.usuario-da-imagem .div-usuario .btn-seguir {
-    margin-left: 20px;
-}
-
-
-.btn-seguir {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    background-color: #ff9900;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-seguir:hover {
-    background-color: #ff6600;
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .btn-seguir:active {
-    background-color: #ff3300;
-  }
-  
-  .btn-seguir:focus {
-    outline: none;
-  }
-  
-  .btn-seguir:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .btn-seguir.loading:before {
-    animation: spin 1s infinite linear;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 
-.usuario-da-imagem .div-usuario img {
-    width: 80px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 50%;
-}
-
-.comentarios-imagem {
-    width: 100%;
-    height: 200px;
-    background-color: rebeccapurple;
-}
-
-.titulo-comentario {
-    font-size: 20px;
-    margin-left: 20px;
-    padding: 20px;
 }
