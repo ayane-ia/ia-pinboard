@@ -22,7 +22,11 @@ class ProfileController extends Controller{
         $id     = $objUser->getUserIdByName($_GET["user"]);
         $id     = $id->user_id;
         $dados  = $objUser->getUserInfo(["user_name", "user_bio", "user_following", "user_followers","user_id","user_publications"], $id);
-        
+        @session_start();
+         
+        if(isset($_SESSION["user_id"])) $logedd = true; 
+        else $data["visiting"] = true;
+
         $data["image"]    = $objImagem->getImagesByUser($id);
 
         $data["user_name"]  = $dados["user_name"];
@@ -31,10 +35,13 @@ class ProfileController extends Controller{
         //if(isset($dados["user_followers"])) $data["user_followers"]         = $dados["user_followers"];else $data["user_followers"] = 0;
         //if(isset($dados["user_following"])) $data["user_following"]         = $dados["user_following"]; else $data["user_following"] = 0;
         if(isset($dados["user_publications"])) $data["user_publications"]   = $dados["user_publications"]; else $data["user_publications"] = 0;
-
+        
+        // verifica se o user atual esta seguindo o user do perfil
+        if(isset($_SESSION["user_id"])){
         $seguindo = $objUser->userIsFollowing($name,$_SESSION["user_id"]);
-        if($seguindo) $data["following"] = true;
-
+        if($seguindo) $data["Isfollowing"] = true;
+        }
+        
         $seguindo   = $objUser->getFollowingByUserId($name);
         if(isset($seguindo) ) $data["following"] = $seguindo;
         elseif($seguindo == false) return $data["following"] = 0;

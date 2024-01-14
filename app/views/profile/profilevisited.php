@@ -1,7 +1,7 @@
 
 <?php 
 
-if(empty($_SESSION)) session_start();
+//if(empty($_SESSION))session_start();
 
 if(isset($_SESSION["error"]["unfollow"])){
   echo "<script>alert('Erro ao deixar de seguir')</script>";
@@ -26,20 +26,25 @@ if(isset($_SESSION["error"]["unfollow"])){
         <li><strong>Publicações:</strong> <?php echo $publications?></li>
       </ul>
 
-      <?php if(isset($edit)) { // A variavael $edit carrega o id do usuario?>
+        <?php if(isset($edit)) { // A variavael $edit carrega o id do usuario?>
         <!--Foi verificado que o usuario esta vendo seu perfil, então o botao e editar aparecera!-->
 
         <a href="<?php echo URL_BASE."user/edit"?>"><button class="btns005">Editar perfil</button></a>
 
-      <?php } elseif(isset($following)) { ?>
+        <?php  } elseif (isset($visiting)) { ?>
+
+        <a href="<?php echo URL_BASE."login"?>"><button class="btns005">Login para seguir</button></a>
+        
+        <?php } elseif(isset($Isfollowing)) { ?>
 
         <a href="<?php echo URL_BASE."profile/unfollow/$user_name"?>"><button class="btns005">Deixar de seguir</button></a>
         
-      <?php  } elseif(!isset($following)){ ?>
+
+        <?php  } elseif(!isset($Isfollowing)){ ?>
 
         <a href="<?php echo URL_BASE."profile/follow/$user_name"?>"><button class="btns005">Seguir</button></a>
 
-      <?php  } ?>
+        <?php   }?>
     </div>
   </main>
 

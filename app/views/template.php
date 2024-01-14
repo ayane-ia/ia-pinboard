@@ -16,7 +16,7 @@
 </head>
 <body>
 <?php 
-if(empty($_SESSION)) session_start();
+if(!isset($_SESSION)) session_start();
 if($_SESSION){
     if(isset($_SESSION["user_id"])) include_once "user_logged/elements/menu.php";
     else  include_once "elements/menu.php";
