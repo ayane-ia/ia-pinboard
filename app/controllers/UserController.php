@@ -20,7 +20,7 @@ class UserController extends Controller{
       
       $data["imagens"]      = $objImagem->getAllImages();
       $data["view"] = "user_logged/home";
-      $this->load("user_logged/template", $data);
+      $this->load("template", $data);
    }
    public function criar(){
       $objImagem = new Imagem;
@@ -28,7 +28,7 @@ class UserController extends Controller{
          session_start();
          if(!isset($_SESSION["user_id"])){
             $data["view"] = "user_logged/criar/notLogged";
-            $this->load("user_logged/template", $data);
+            $this->load("template", $data);
          }
       }
       $data["categorias"] = $objImagem->getCategories();
@@ -55,7 +55,7 @@ class UserController extends Controller{
          }
       }
       $data["view"] = "user_logged/criar/criar";
-      $this->load("user_logged/template", $data);
+      $this->load("template", $data);
    }
    public function edit(){
       

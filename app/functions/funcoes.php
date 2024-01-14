@@ -299,6 +299,7 @@ function insertDefault($cn, $tb, $clmn,$values)
     {
         return false;
     }
+
     $tmp1 = "";
     $t = 0;
     $t1 = count($clmn);
@@ -416,7 +417,13 @@ function insertDefault($cn, $tb, $clmn,$values)
         $query->bindValue("id",$id);
         $query->execute();
     }
-
+    function deleteById_twoEquals($conn, $table, $once_column_id, $twice_column_id, $id, $id2){
+        $sql = "DELETE FROM $table WHERE $once_column_id = :id AND  $twice_column_id = :id2";
+        $query = $conn->prepare($sql);
+        $query->bindValue("id",$id);
+        $query->bindValue("id2",$id2);
+        $query->execute();
+    }
     // operations in database
     function maxValue($conn, $param, $table)
     {   // return the max value in the param max_value

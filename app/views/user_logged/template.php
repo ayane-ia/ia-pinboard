@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo URL_BASE."assets/"?>src/css/editarperfil.css">
     <link rel="stylesheet" type="text/css" href="/ia-pinboard/assets/src/css/editarperfil.css">
     <link rel="stylesheet" type="text/css" href="/ia-pinboard/assets/src/css/editarperfiluser.css">
+    <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/sobreimg.css">
     <title>AI Pinboard</title>
 </head>
 <body>

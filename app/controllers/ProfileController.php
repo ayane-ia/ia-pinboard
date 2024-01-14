@@ -24,8 +24,9 @@ class ProfileController extends Controller{
         $dados  = $objUser->getUserInfo(["user_name", "user_bio", "user_following", "user_followers","user_id","user_publications"], $id);
         @session_start();
          
+        // se houver sessao e houver id de usuario, ou seja, logado, logged eh verdadeiro
         if(isset($_SESSION["user_id"])) $logedd = true; 
-        else $data["visiting"] = true;
+        else $data["visiting"] = true; // se nao, o modo visitante eh ativado
 
         $data["image"]    = $objImagem->getImagesByUser($id);
 
@@ -70,10 +71,12 @@ class ProfileController extends Controller{
 
     $follow = $objUser->follow($user,$_SESSION["user_id"]);
     if($follow){ 
+        // processo de follow com sucesso
         $_SESSION["follow_sucess"] = true;
         header("location: ".URL_BASE."profile/?user=$user");
     }elseif($follow == "exists" || $follow == "isFollowing"){
-
+        
+        // erro no banco de dados
         $_SESSION["error"]["exists"] = true;
         header("location: ".URL_BASE."profile/?user=$user"); 
     }
@@ -82,10 +85,11 @@ class ProfileController extends Controller{
    public function unfollow($user){
     $objUser        = new User;
     //if(!$objUser->userIsFollowing($user,$_SESSION["user_id"])) header("location: ".URL_BASE."profile/?user=$user");
-    if(empty($_SESSION)) session_start();
+    @session_start();
 
     if($objUser->unFollow($user,$_SESSION["user_id"])) header("location: ".URL_BASE."profile/?user=$user");
     else {
+        // erro no banco de dados
         $_SESSION["error"]["unfollow"] = true;
         header("location: ".URL_BASE."profile/?user=$user");
     }

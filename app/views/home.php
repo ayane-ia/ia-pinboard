@@ -4,9 +4,9 @@
     <div class="container-mae">
       
     <div class="grid-container">
-      <?php if($imagens){ foreach($imagens as $img){?>
+      <?php if($imagens){ foreach($imagens as $img){ $id = $img->image_id;?>
         <div class="grid-item">
-            <a href="#"><img class="lazyload"  data-src="<?php echo URL_BASE."userData/".$img->image_path?>" alt="Image" loading="lazy"></a>
+            <a href="<?php echo URL_BASE."image/?id=$id"?>"><img class="lazyload"  data-src="<?php echo URL_BASE."userData/".$img->image_path?>" alt="Image" loading="lazy"></a>
           </div>
         <?php }}?>
         <!-- Adicione mais itens de grade conforme necessário -->

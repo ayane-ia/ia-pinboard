@@ -84,7 +84,61 @@ class Imagem extends Model{
     }
 
     public function getImagesByUser($user_id){
+        
         return selectAll_equal($this->db,"images","image_authorId",$user_id);
+    }
+
+    public function getImageById($imageId){
+
+        return selectOnceEqual($this->db,"*","images","image_id",$imageId,1);
+         
+    }
+
+    public function getUserIdByName($name){
+        $temp =  selectOnceEqual($this->db,"user_id","user","user_name",$name,1);
+        return $temp->user_name;
+    }
+
+    public function isImage($image_id){
+        $temp = selectOnceEqual($this->db,"*","images","image_id",$image_id,1);
+        if(!$temp) return false;
+        if($temp != null && $temp != false) return true;
+        else return false;
+    }
+
+    public function like($image_id, $user_id){
+        if(is_string($user_id)) $user_id = $this->getUserIdByName($user_id);
+        elseif($user_id == false || $user_id == null) die("fatal error <a href=".URL_BASE.">Voltar a home?</a>");
+        if(!$this->isImage($image_id)) return false;
+
+        insertDefault($this->db,"likes",["image","user"],[$image_id,$user_id]);
+        return true;
+
+    }
+
+    public function getLikesByImageId($imageId){
+        $count = countAll($this->db,"likes","*","image",$imageId);
+        return $count;
+    }
+
+    public function isLike($imageId, $user_id){
+        $temp = selectPerTwoValues_Equals($this->db,"likes","image","user",$imageId,$user_id);
+        if($temp == true) return true;
+        elseif($temp == false || $temp == null) return false;
+    }
+
+    public function unlike($imageId, $user_id){
+        if(is_string($user_id)) $user_id = $this->getUserIdByName($user_id);
+        elseif($user_id == false || $user_id == null) die("fatal error <a href=".URL_BASE.">Voltar a home?</a>");
+
+        if(!$this->isImage($imageId)) return false;
+
+        if($this->isLike($imageId, $user_id) || $this->isLike($imageId, $user_id) == null){
+            deleteById_twoEquals($this->db,"likes","image","user",$imageId,$user_id);
+            return true;
+        }else return false;
+       
+
     }
 }
 ?>
