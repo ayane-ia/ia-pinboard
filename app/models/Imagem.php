@@ -137,8 +137,33 @@ class Imagem extends Model{
             deleteById_twoEquals($this->db,"likes","image","user",$imageId,$user_id);
             return true;
         }else return false;
-       
+    
+    }
+    public function isComent($image_id, $user_id, $content){
+        $sql = "SELECT * FROM comments AS cm WHERE cm.image_id = :imd AND cm.user_id = :userid AND cm.comment_content = :cntt ";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":imd", $image_id);
+        $query->bindValue(":userid", $user_id);
+        $query->bindValue(":cntt", $content);
+        $query->execute();
+        $temp = $query->fetch(\PDO::FETCH_OBJ);
+        if($temp) return true;
+        else return false;
+        
+    }
+    public function insertComment($imageId, $userId, $content){
+        if(is_string($userId)) $userId = $this->getUserIdByName($userId);
+        elseif($userId == false || $userId == null) die("fatal error <a href=".URL_BASE.">Voltar a home?</a>");
+        if(!$this->isImage($imageId)) return false;
 
+        if($this->isComent($imageId,$userId,$content)) return "exist";
+        if(insertDefault($this->db,"comments",["image_id","user_id","comment_content"], [$imageId,$userId,$content])) return true;
+        else return false;
+
+    }
+    public function getCommentsByImageId($imageId){
+        $temp = selectAll_equal($this->db,"comments","image_id",$imageId);
+        return $temp;
     }
 }
 ?>

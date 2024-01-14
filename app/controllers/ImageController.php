@@ -24,9 +24,16 @@ class ImageController extends Controller{
          else $data["liked"] = false;  
       }
 
+      $data["comments"] = $objImage->getCommentsByImageId($imageId);
 
       $data["likes"] = $objImage->getLikesByImageId($imageId);
       if(!$data["likes"]) $data["likes"] = 0;
+
+      if(isset($_POST) && isset($_POST["comment"])){
+         $objImage->insertComment($imageId,$_SESSION["user_id"],$_POST["comment"]);
+         $data["comments"] = $objImage->getCommentsByImageId($imageId);
+         
+      }
 
       $data["view"] = "inimage";
       $this->load("template",$data);

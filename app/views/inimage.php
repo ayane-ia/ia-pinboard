@@ -49,14 +49,14 @@
         <div class="titulo-comentario">
           <h3>comentarios</h3>
         </div>
-  
+        <?php if(isset($comments)) foreach($comments as $cmt){?>
         <div class="comentario-digitado">
           <div><a href=""><img class="imagem-do-usuario-comentario" src="<?php echo URL_BASE?>assets/images/fotodeperfiluser/perfilAyano.jpeg" alt=""></a></div>
           <div class="comentariodousuario">
-            <span>Rapaz só queria uma dessa lá em casa.</span>
+            <span><?php echo $cmt->comment_content?></span>
           </div> 
         </div>
-        
+        <?php }?>
   
         
   
@@ -66,7 +66,7 @@
 
       <div class="digita-comentario">
         <form action="" method="post">
-          <textarea class="comentario-textarea" placeholder="Deixe seu comentário aqui"></textarea>
+          <textarea class="comentario-textarea" placeholder="Deixe seu comentário aqui" name="comment"></textarea>
 
           <input type="submit" value="Comentar" class="btns004">
         </form>
