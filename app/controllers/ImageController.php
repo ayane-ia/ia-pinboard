@@ -30,9 +30,12 @@ class ImageController extends Controller{
       if(!$data["likes"]) $data["likes"] = 0;
 
       if(isset($_POST) && isset($_POST["comment"])){
-         $objImage->insertComment($imageId,$_SESSION["user_id"],$_POST["comment"]);
-         $data["comments"] = $objImage->getCommentsByImageId($imageId);
-         
+         if(isset($_SESSION["user_id"])){
+            $objImage->insertComment($imageId,$_SESSION["user_id"],$_POST["comment"]);
+            $data["comments"] = $objImage->getCommentsByImageId($imageId);
+         }else{
+            $data["error"]["notLogged"] = true;
+         }
       }
 
       $data["view"] = "inimage";

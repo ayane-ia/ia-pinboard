@@ -11,7 +11,14 @@ class ProfileController extends Controller{
         $objUser    = new User;
 
         if(isset($_GET["user"])){
+
             $name       = $_GET["user"];
+            if(is_numeric($name)){
+                $name = $objUser->getUserNameById($name);
+                header("location: ".URL_BASE."profile/?user=$name"); 
+            }
+            
+
             if($objUser->isUser($name) == false) header("location: ".URL_BASE); 
             $user_id    = $objUser->getUserIdByName($name);
             if(empty($_SESSION)) session_start();

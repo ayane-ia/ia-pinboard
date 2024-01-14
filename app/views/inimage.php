@@ -1,10 +1,11 @@
+<?php 
+if(isset($error) && isset($error["notLogged"])){ ?>
+<!--SE O USUARIO NAO ESTIVER LOGADO E MANDOU UM COMENTARIO-->
+<script>alert('Faca Login para comentar')</script>
+<?php } ?>
 <div class="container-pai">
     <div class="container-imagem-tema">
       <img class="img-image-tema" src="<?php echo URL_BASE."userData/".$image->image_path?>" alt="">
-
-      <!--
-
-      -->
 
       <div class="sobre-img">
         <h1 class="titulo-img"><?php echo $image->image_title?></h1>
@@ -41,7 +42,6 @@
       <span class="nome-do-usuario"><?php echo $image->user_name?></span>
       <button class="btns005">Seguir</button>
 
-      
     </div>
 
     <div class="pai-container-comentario">
@@ -51,17 +51,13 @@
         </div>
         <?php if(isset($comments)) foreach($comments as $cmt){?>
         <div class="comentario-digitado">
-          <div><a href=""><img class="imagem-do-usuario-comentario" src="<?php echo URL_BASE?>assets/images/fotodeperfiluser/perfilAyano.jpeg" alt=""></a></div>
+          <div><a href="<?php echo URL_BASE."profile/?user=$cmt->user_id"?>"><img class="imagem-do-usuario-comentario" src="<?php echo URL_BASE?>assets/images/fotodeperfiluser/perfilAyano.jpeg" alt=""></a></div>
           <div class="comentariodousuario">
             <span><?php echo $cmt->comment_content?></span>
           </div> 
         </div>
         <?php }?>
   
-        
-  
-       
-        
       </div>
 
       <div class="digita-comentario">
