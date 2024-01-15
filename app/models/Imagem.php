@@ -60,6 +60,7 @@ class Imagem extends Model{
                }
             }
             else{
+                
                 return "notDir";
             }
         

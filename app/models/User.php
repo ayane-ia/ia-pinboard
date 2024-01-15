@@ -7,7 +7,7 @@ include_once "app/functions/funcoes.php";
 class User extends Model{
     public $USER_PROFILE = USER_PATH;
 
-    private function verifyUserDirectory($id){
+    public function verifyUserDirectory($id){
         //$max_value = maxValue($this->db,"user_id","user") + 1;
         $directory_name =  "user".$id;
         if(is_dir($this->USER_PROFILE)) $path = "$this->USER_PROFILE$directory_name";   
@@ -31,7 +31,7 @@ class User extends Model{
         $values     = [$userName, $email, $userPswd, $userAge];
         $insert = insertDefault($this->db, "user",$columns, $values);
         if($insert){
-            if($this->verifyUserDirectory($insert)) return true;
+            if($this->verifyUserDirectory($insert)) return $insert;
         }
         else return false;
     }
@@ -150,5 +150,6 @@ class User extends Model{
         if($count) return $count;
         else return false;
     }
+
 }
 ?>
