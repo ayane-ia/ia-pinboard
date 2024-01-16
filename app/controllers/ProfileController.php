@@ -28,7 +28,7 @@ class ProfileController extends Controller{
         }else header("location: ".URL_BASE);
         $id     = $objUser->getUserIdByName($_GET["user"]);
         $id     = $id->user_id;
-        $dados  = $objUser->getUserInfo(["user_name", "user_bio", "user_following", "user_followers","user_id","user_publications"], $id);
+        $dados  = $objUser->getUserInfo(["user_name", "user_bio","user_id","user_publications"], $id);
         @session_start();
          
         // se houver sessao e houver id de usuario, ou seja, logado, logged eh verdadeiro

@@ -91,12 +91,10 @@ if(isset($error) && isset($error["notLogged"])){ ?>
      <div class="scimg-section-container">
       <h3>Mais Imagem relacionadas</h3>
      <div class="scimg-section">
-      <a href=""><img src="<?php echo URL_BASE?>assets/images/personagens/personagens12.png" alt="personagem"></a>
-      <a href=""><img src="<?php echo URL_BASE?>assets/images/paisagens/paisagens12.png" alt="personagem"></a>
-      <a href=""><img src="<?php echo URL_BASE?>assets/images/paisagens/paisagens2.png" alt="personagem"></a>
-      <a href=""><img src="<?php echo URL_BASE?>assets/images/fundopc/fundoPC10.png" alt="personagem"></a>
-      <a href=""><img src="<?php echo URL_BASE?>assets/images/personagens/personagens9.png" alt="personagem"></a>
-      <a href=""><img src="<?php echo URL_BASE?>assets/images/personagens/personagens33.png" alt="personagem"></a>
+          <?php if(isset($moreImages)) { foreach($moreImages as $img) { $id = $img->image_id;?>a
+            <a href="<?php echo URL_BASE."image/?id=$id"?>"><img class=" ls-is-cached lazyloaded" data-src="<?php echo URL_BASE."userData/".$img->image_path?>" alt="" loading="lazy" src="<?php echo URL_BASE."userData/".$img->image_path?>"></a>
+          <?php } } ?>
+
      </div>
   </div>
   <!--Fim da seção de imagem com texto-->

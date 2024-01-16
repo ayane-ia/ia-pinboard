@@ -1,0 +1,107 @@
+body {
+    background-image: url('../../public/images/PaginaInicialimg/personagemF15.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 50%;
+    background-color: #ffffffdc;
+    min-height: auto;
+    margin: 100px auto;
+    border-radius: 20px;
+}
+
+.form h2 {
+    font-size: 30px;
+}
+
+.logo {
+    width: 50px;
+    border-radius: 50%;
+}
+
+
+.container-inputs {
+    width: 70%;
+    margin: 50px auto;
+}
+
+
+.container-inputs label {
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+}
+
+.input-cadastro {
+    display: block;
+    margin: auto;
+    width: 70%;
+    padding: 15px;
+    border-radius: 20px;
+    outline-color: aqua;
+    border: 1px solid white;
+}
+
+.preview {
+    border-radius: 10px;
+}
+
+.label-upload-de-image {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+  }
+
+@media screen and (max-width: 850px) {
+    .container {
+        width: 100%;
+        margin-top: 100px;
+    }
+
+    .form h2 {
+        font-size: 20px;
+    }
+
+    .container-inputs {
+        width: 99%;
+        margin: 0px auto;
+    }
+
+    .form {
+        
+        padding: 10px;
+    }
+
+    .p-form {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .container {
+        width: 100%;
+        margin-top: 25px;
+        min-height: auto;
+        border-radius: 0;
+    }
+    
+
+}
+
+@media screen and (max-width: 340px) {
+    .container {
+        width: 100%;
+        margin-top: 0;
+        min-height: auto;
+    }
+}

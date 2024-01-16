@@ -1,0 +1,116 @@
+@import url('styleboost.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.menu {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    z-index: 999;
+  }
+  
+  .logo img {
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-form input {
+    padding: 8px;
+    border: none;
+    outline-color: aqua;
+    border-radius: 10px;
+    margin-right: 10px;
+    background-color: #d1cbcb;
+  }
+  
+  .search-form button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .icon-menus {
+    width: 40px;
+  }
+
+  .icon-menus-avatar {
+    width: 30px;
+    display: block;
+
+  }
+  
+  .menu-items {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    gap: 20px;
+  }
+  
+  .menu-items li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu-items li a:hover {
+    background-color: #f2f2f2;
+  }
+
+  .menu-items li a .icon-menus {
+    display: none;
+  }
+
+
+  @media screen and (max-width: 678px) {
+    .menu {
+      width: 100%;
+      position: fixed;
+      top: initial;
+      bottom: 0;
+      justify-content: center;
+      height: 70px;
+      padding: 10px;
+    }
+
+    .menu-items li a .icon-menus {
+      display: initial;
+    }
+
+    .menu span {
+      display: none;
+    }
+
+    .icon-menus {
+      width: 30px;
+    }
+
+    .menu-items {
+      gap: 5px;
+    }
+
+    .menu-items li a {
+      padding: 10px;
+    }
+  }

@@ -65,23 +65,41 @@ class Imagem extends Model{
             }
         
     }
-    public function getCategoryIdByName($name){
-
-    }
 
     public function getImagesPerCategory($categoryName){
          
-        $sql  = "SELECT category_id FROM categories as ct WHERE ct.category_name = :vl";
-        $qry  = $this->db->prepare($sql);
-        $qry->bindValue(":vl", $categoryName);
-        $qry->execute();
-        $id = $qry->fetch(\PDO::FETCH_OBJ);
-        $id = $id->category_id;
+        if(is_string($categoryName) && !is_numeric($categoryName)){
+            $sql  = "SELECT category_id FROM categories as ct WHERE ct.category_name = :vl";
+            $qry  = $this->db->prepare($sql);
+            $qry->bindValue(":vl", $categoryName);
+            $qry->execute();
+            $id = $qry->fetch(\PDO::FETCH_OBJ);
+            $id = $id->category_id;
+        }else{
+            $id = $categoryName;
+        }
          
         $sql  = "SELECT * FROM images as im WHERE im.image_category = $id";
         $qry  = $this->db->prepare($sql);
         $qry->execute();
         return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }    public function getImagesPerCategory_array($categoryName){
+         
+        if(is_string($categoryName) && !is_numeric($categoryName)){
+            $sql  = "SELECT category_id FROM categories as ct WHERE ct.category_name = :vl";
+            $qry  = $this->db->prepare($sql);
+            $qry->bindValue(":vl", $categoryName);
+            $qry->execute();
+            $id = $qry->fetch(\PDO::FETCH_OBJ);
+            $id = $id->category_id;
+        }else{
+            $id = $categoryName;
+        }
+         
+        $sql  = "SELECT * FROM images as im WHERE im.image_category = $id";
+        $qry  = $this->db->prepare($sql);
+        $qry->execute();
+        return $qry->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getImagesByUser($user_id){
@@ -97,6 +115,7 @@ class Imagem extends Model{
 
     public function getUserIdByName($name){
         $temp =  selectOnceEqual($this->db,"user_id","user","user_name",$name,1);
+        if(!$temp) return false;
         return $temp->user_name;
     }
 
@@ -165,6 +184,33 @@ class Imagem extends Model{
     public function getCommentsByImageId($imageId){
         $temp = selectAll_equal($this->db,"comments","image_id",$imageId);
         return $temp;
+    }
+
+    public function isCategory($ct){
+        $temp = selectOnceEqual($this->db,"*","categories","category_id",$ct,1);
+        if($temp != false && $temp != null) return $temp;
+        else return false;
+    }
+    public function getImagesByUserCategory($user, $ct){
+        $sql = "SELECT * FROM images WHERE image_authorId = $user AND image_category = $ct";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getMoreImages($userId, $category, $currentImageId){
+        if(is_string($userId) && !is_numeric($userId)) $userId = $this->getUserIdByName($userId);
+        elseif($userId == false || $userId == null) die("fatal error <a href=".URL_BASE.">Voltar a home?</a>");
+
+        $allCategory    = $this->getImagesPerCategory($category);
+
+        for ($j= 0 ; $j < count($allCategory); $j++) { 
+            if($allCategory[$j]->image_id != $currentImageId) $total[$j] = $allCategory[$j];
+        }
+
+        if($total == null || $total == false) return false;
+        else return $total;
     }
 }
 ?>

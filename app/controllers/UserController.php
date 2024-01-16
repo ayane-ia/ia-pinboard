@@ -75,7 +75,8 @@ class UserController extends Controller{
 
          if(isset($_POST["bio"])) $bio = $_POST["bio"];else $bio = null;
 
-         $objUser->updateNameBio($_SESSION["user_id"], $name , $bio);
+         if($objUser->updateNameBio($_SESSION["user_id"], $name , $bio)) header("location: ".URL_BASE."user/edit");
+         else die("Houve um erro no sistema, clique <a href=".URL_BASE.">aqui</a> para voltar");
       }
 
       $data["view"]         = "user_logged/profile/editprofile";

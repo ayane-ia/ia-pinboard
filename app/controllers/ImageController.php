@@ -24,6 +24,10 @@ class ImageController extends Controller{
          if($objImage->isLike($imageId,$_SESSION["user_id"])) $data["liked"] = true;  
          else $data["liked"] = false;  
       }
+      $imageUser = $data["image"]->image_authorId;
+
+      $data["moreImages"] = $objImage->getMoreImages($imageUser,$data["image"]->image_category,$data["image"]->image_id);
+      
 
       $data["comments"] = $objImage->getCommentsByImageId($imageId);
 
@@ -48,6 +52,8 @@ class ImageController extends Controller{
             $data["error"]["notLogged"] = true;
          }
       }
+
+
 
       $data["view"] = "inimage";
       $this->load("template",$data);
@@ -119,4 +125,5 @@ class ImageController extends Controller{
           header("location: ".URL_BASE."profile/?user=$user");
       }
      }
+     
 }
