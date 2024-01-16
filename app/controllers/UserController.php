@@ -67,9 +67,17 @@ class UserController extends Controller{
       $dados = $objUser->getUserInfo(["user_name", "user_bio"], $_SESSION["user_id"]);
       $data["name"] = $dados["user_name"];
       $data["bio"] = $dados["user_bio"];
-
-      if(is_string($dados[1])) $data["bio"] = $dados[1];
       
+      if(isset($dados[1]) && is_string($dados[1])) $data["bio"] = $dados[1];
+      
+      if(isset($_POST) && isset($_POST["name"])){
+         $name = $_POST["name"];
+
+         if(isset($_POST["bio"])) $bio = $_POST["bio"];else $bio = null;
+
+         $objUser->updateNameBio($_SESSION["user_id"], $name , $bio);
+      }
+
       $data["view"]         = "user_logged/profile/editprofile";
       $this->load("template", $data);
 

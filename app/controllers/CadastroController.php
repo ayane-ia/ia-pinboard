@@ -10,7 +10,7 @@ class CadastroController extends Controller{
     $objUser = new User;
         if(isset($_POST)){
             if(isset($_POST["user_name"]) && isset($_POST["user_email"]) && isset($_POST["user_password"]) && isset($_POST["user_age"])){
-                $userName   = $_POST["user_name"];
+                $userName   = trim($_POST["user_name"]);
                 $email      = $_POST["user_email"];
                 $pswd       = $_POST["user_password"];
                 $age        = $_POST["user_age"];

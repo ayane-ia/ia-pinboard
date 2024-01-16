@@ -14,16 +14,16 @@
 
                 <span class="span-edita-perfil btns005">Alterar foto</span>
             </div>
-
+            
             <div class="div-edita-biografia">
                 <span class="biografia-titulo">Editar nome</span>
-                <input class="editar-nome" type="text" placeholder="Editar nome" value="<?php if(isset($name)) echo $name;?>">
+                <input class="editar-nome" name="name" type="text" placeholder="Editar nome" value="<?php if(isset($name)) echo $name;?>">
             </div>
 
             <div class="div-edita-biografia">
                 <span class="biografia-titulo">Biografia</span>
 
-                <textarea name="" id="biografia-textarea" cols="1" rows="1" placeholder="Biografia">
+                <textarea name="bio" id="biografia-textarea" cols="1" rows="1" placeholder="Biografia">
                 <?php if(isset($bio)) echo $bio;?>
                 </textarea>
             </div>

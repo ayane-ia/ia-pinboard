@@ -170,6 +170,18 @@ class User extends Model{
         if($count) return $count;
         else return false;
     }
+    public function updateNameBio($user,$name,$bio){
+        if(!is_numeric($user) && is_string($user)) $user = $this->getUserIdByName($user);
+        if(is_object($user)) $user = $user->user_id;
+
+        $sql = "UPDATE `user` SET `user_name` = :nome,`user_bio` = :bio  WHERE `user`.`user_id` = $user;";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":nome",$name);
+        $query->bindValue(":bio",$bio);
+        $query->execute();
+
+        return true;
+    }
 
 }
 ?>
