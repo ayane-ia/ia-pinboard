@@ -2,17 +2,17 @@
   switch ($error) {
     case 'notSend':
       # code...
-      echo "<script>alert('ERRO AO ENVIAR!')</script>";
+      echo "<script>alert('1ERRO AO ENVIAR!')</script>";
     break;
   
     case 'notDir':
         # code...
-        echo "<script>alert('ERRO AO ENVIAR!')</script>";
+        echo "<script>alert('2ERRO AO ENVIAR!')</script>";
     break;
   
     case 'fatalError':
       # code...
-      echo "<script>alert('ERRO AO ENVIAR!')</script>";
+      echo "<script>alert('3ERRO AO ENVIAR!')</script>";
     break;
   
     case 'mime':

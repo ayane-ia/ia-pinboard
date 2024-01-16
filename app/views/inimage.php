@@ -36,12 +36,30 @@ if(isset($error) && isset($error["notLogged"])){ ?>
     </div>
     <div class="usuario-que-postou">
       <div class="imagem-perfil">
-       <a href=""> <img class="imagem-perfil-img" src="<?php echo URL_BASE?>assets/images/fotodeperfiluser/lontra.jpeg" alt=""></a>
+       <a href="<?php echo URL_BASE."profile/?user=$image->image_authorId"?>"> <img class="imagem-perfil-img" src="<?php echo URL_BASE?>assets/images/fotodeperfiluser/lontra.jpeg" alt=""></a>
        
       </div>
       <span class="nome-do-usuario"><?php echo $image->user_name?></span>
-      <button class="btns005">Seguir</button>
 
+      <?php if(!isset($itsMe) || !$itsMe) { ?>
+
+        
+        <?php if($following || $following == true) { ?>  
+          <!--Se o user estiver seguindo o user do perfil que postou a foto-->
+        <a href="<?php echo URL_BASE?>image/unfollow/<?php echo $image->image_authorId?>/<?php echo $image->image_id?>">
+          <button class="btns005">Deixar de Seguir</button>
+        </a>
+      
+      
+          <?php }elseif(!$following || $following == false) {  ?> <!--Se o user nao estiver seguindo o user do perfil que postou a foto-->
+            <a href="<?php echo URL_BASE?>image/follow/<?php echo $image->image_authorId?>/<?php echo $image->image_id?>">
+              <button class="btns005">Seguir</button>
+            </a>
+          <?php }?>
+
+      
+
+      <?php } ?>
     </div>
 
     <div class="pai-container-comentario">

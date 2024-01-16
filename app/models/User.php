@@ -42,7 +42,9 @@ class User extends Model{
         return selectOnceEqual($this->db,"user_id","user","user_email",$email,1);
     }
     public function getUserIdByName($name){
-        return  selectOnceEqual($this->db,"user_id","user","user_name",$name,1);
+        $temp =  selectOnceEqual($this->db,"user_id","user","user_name",$name,1);
+        if($temp) return $temp;
+        else return false;
     }
     public function getUserInfo($arr, $id){
         $sql = "SELECT * FROM user WHERE user_id = $id";
@@ -62,6 +64,11 @@ class User extends Model{
         else return $data[0][$arr];
     }
     public function isUser($name){
+        if(is_numeric($name)){
+          if($this->getUserNameById($name)) return true;
+          else return false;  
+        }
+
         $userTrue = selectOnceEqual($this->db,"user_name","user","user_name",$name,1);
         if(!$userTrue) return false;
         $user = $userTrue->user_name;
@@ -72,23 +79,24 @@ class User extends Model{
         else return false;
     }
     public function userIsFollowing($userToKnow,$currentUserId){
-
+        
         if(is_string($currentUserId)){
             $currentUserId = $this->getUserIdByName($currentUserId);
             $currentUserId = $currentUserId->user_id;
         }
-        if(is_string($userToKnow)) { $userToKnow = $this->getUserIdByName($userToKnow);
-            $userToKnow = $userToKnow->user_id;
+        if(is_string($userToKnow)) { 
+            $userToKnow = $this->getUserIdByName($userToKnow);
+           if(is_object($userToKnow))  $userToKnow = $userToKnow->user_id;
         } 
 
-        $sql = "SELECT * FROM following WHERE following.follower = $userToKnow AND following.followed = $currentUserId";
+        $sql = "SELECT * FROM following WHERE follower = $userToKnow AND followed = $currentUserId";
         $qry = $this->db->prepare($sql);
         $qry->execute();
-
+        
         $temp = $qry->fetch(\PDO::FETCH_OBJ);
-
+            
         if(!$temp) return false;
-        return $temp;
+        return $temp->id;
     }
 
     public function follow($userToFollow, $currentUserId){
@@ -98,6 +106,11 @@ class User extends Model{
         $userIdToFollow = $this->getUserIdByName($userToFollow);
         if(!$userIdToFollow) return false;
         $userIdToFollow = $userIdToFollow->user_id;
+
+        if($userToFollow == $currentUserId) return "equal_users";
+        $temp = $this->getUserIdByName($userToFollow);
+        if( $temp->user_id == $currentUserId) return "equal_users";
+        unset($temp);
 
         $clmn = ["follower","followed"];
         $vle  = [$userIdToFollow, $currentUserId];
@@ -112,6 +125,13 @@ class User extends Model{
 
     public function unFollow($user, $currentUserId){
         $userId = $this->getUserIdByName($user);
+
+        if($user == $currentUserId) return "equal_users";
+
+        if($user == $currentUserId) return "equal_users";
+        $temp = $this->getUserIdByName($user);
+        if( $temp->user_id == $currentUserId) return "equal_users";
+        unset($temp);
 
         $userId = $userId->user_id;
         $sql = "DELETE  FROM following  WHERE following.follower = :user AND following.followed = :currentUser";

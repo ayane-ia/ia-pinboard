@@ -16,9 +16,11 @@ class CadastroController extends Controller{
                 $age        = $_POST["user_age"];
                 $create     = $objUser->createUser($userName,$email,$pswd,$age);
                 if($create){
-                    $objUser->verifyUserDirectory($create);
                     $url = URL_BASE."login";
                     header("location: $url");
+                }
+                else{
+                    die("erro in db <a href=".URL_BASE.">Voltar ? </a>");
                 }
             }
         }

@@ -8,6 +8,7 @@ class ImageController extends Controller{
    public function index(){
       $objImage = new Imagem;
       $objUser  = new User;
+
     if($_GET["id"]) $imageId = $_GET["id"];
     $data["image"] =  $objImage->getImageById($imageId);
 
@@ -28,6 +29,16 @@ class ImageController extends Controller{
 
       $data["likes"] = $objImage->getLikesByImageId($imageId);
       if(!$data["likes"]) $data["likes"] = 0;
+
+      if($objUser->userIsFollowing($data["image"]->user_name,$_SESSION["user_id"])) $data["following"] = true;
+      else $data["following"] = false;
+      
+      // se o usuario visitado for eu mesmo
+      
+      if($data["image"]->image_authorId == $_SESSION["user_id"]) $data["itsMe"] = true;
+      else $data["itsMe"] = false;
+
+      //die(var_dump($data["itsMe"]));
 
       if(isset($_POST) && isset($_POST["comment"])){
          if(isset($_SESSION["user_id"])){
@@ -50,6 +61,7 @@ class ImageController extends Controller{
       if($objImage->like($imageId,$_SESSION["user_id"])) header("location: ".URL_BASE."image/?id=$imageId");
 
    }
+
    public function unlike($imageId){
       $objImage = new Imagem;
       $objUser  = new User;
@@ -60,4 +72,51 @@ class ImageController extends Controller{
       else die("fatal error in DB, back to the <a href=".URL_BASE.">Home</a> ");
 
    }
+   public function follow($user,$imageId){
+      
+      $objUser        = new User;
+      if(!isset($_SESSION)) session_start();
+      if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
+
+      if(is_numeric($user)) $user = $objUser->getUserNameById($user);
+      if($objUser->isUser($user) == false) header("location: ".URL_BASE);
+      
+      if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
+  
+      $follow = $objUser->follow($user,$_SESSION["user_id"]);
+      if($follow){ 
+          // processo de follow com sucesso
+          $_SESSION["follow_sucess"] = true;
+          header("location: ".URL_BASE."image/?id=$imageId");
+      }elseif($follow == "exists" || $follow == "isFollowing"){
+          
+          // erro no banco de dados
+          $_SESSION["error"]["exists"] = true;
+          header("location: ".URL_BASE."profile/?user=$user"); 
+      }
+      elseif($follow == "equal_users"){
+         header("location: ".URL_BASE); 
+     }
+     }
+     public function unfollow($user,$imageId){
+      $objUser        = new User;
+      //if(!$objUser->userIsFollowing($user,$_SESSION["user_id"])) header("location: ".URL_BASE."profile/?user=$user");
+      
+      @session_start();
+      if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
+
+      if(is_numeric($user)) $user = $objUser->getUserNameById($user);
+
+      if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
+      $unfollow = $objUser->unFollow($user,$_SESSION["user_id"]);
+      if($unfollow) header("location: ".URL_BASE."image/?id=$imageId");
+      elseif($unfollow == "equal_users"){
+         header("location: ".URL_BASE);
+      }
+      else {
+          // erro no banco de dados
+          $_SESSION["error"]["unfollow"] = true;
+          header("location: ".URL_BASE."profile/?user=$user");
+      }
+     }
 }

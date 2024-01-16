@@ -53,8 +53,8 @@ if(isset($_SESSION["error"]["unfollow"])){
     <h3>Publicações</h3>
    <div class="scimg-section">
     
-    <?php if($image){ foreach($image as $img){?>
-          <a href="#"><img src="<?php echo URL_BASE."userData/".$img->image_path?>" alt="imagem"></a>
+    <?php if($image){ foreach($image as $img){ $id = $img->image_id; ?>
+      <a href="<?php echo URL_BASE."image/?id=$id"?>"><img src="<?php echo URL_BASE."userData/".$img->image_path?>" alt="imagem"></a>
     <?php }}?>
       <?php if(!$image) { ?>
        <p style="color: white;">Não há publicações por aqui ;-;</p>
