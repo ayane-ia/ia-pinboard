@@ -5,9 +5,7 @@ use app\models\User;
 include_once "app/functions/funcoes.php";
 
 class Login extends Model{
-    public function login($email,$pswd){
-        $objUser = new User;
-        $email = trim($email);
+    public function loginAdm($email,$pswd){
         $ac = 0;
         for($i = 0; $i<=3; $i++){
             if($email[$i] == "#"){
@@ -45,7 +43,8 @@ class Login extends Model{
                                     }
                                     $temp_email = implode("",$temp_email);
                                     if($temp_email == $adm->adm_email){
-                                        return "adm";
+                                        $temp_values = selectOnceEqual($this->db,"adm_id","adm","adm_email",$temp_email,1);
+                                        return $temp_values->adm_id;
                                     }
                                 }
                         }
@@ -53,9 +52,22 @@ class Login extends Model{
                 }
             }
         }
+    }
+    public function login($email,$pswd){
+        $objUser = new User;
+        $email = trim($email);
+        
         $clmns = ["user_email", "user_password"];
         if (Login_model($this->db,"user",$clmns,$email,$pswd)) return true;
-        else return false; 
+        else {
+            
+            $adm = $this->loginAdm($email,$pswd);
+            if(!$adm) return false;
+
+            $temp =  selectOnceEqual($this->db,"*","adm","adm_id",$adm,1);
+            if($temp) return $temp;
+            else return false;
+        }
     }
 }
 ?>

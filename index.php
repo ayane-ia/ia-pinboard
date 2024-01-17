@@ -1,4 +1,6 @@
 <?php
+
+
 if(!file_exists(".htaccess")){
     $temp = fopen(".htaccess", "w");
     if(!$temp) die("HOUVE ERRO NA CRIACAO DE ARQUIVOS DE SERVIDOR");

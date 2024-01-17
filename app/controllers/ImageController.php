@@ -34,9 +34,10 @@ class ImageController extends Controller{
       $data["likes"] = $objImage->getLikesByImageId($imageId);
       if(!$data["likes"]) $data["likes"] = 0;
 
-      if($objUser->userIsFollowing($data["image"]->user_name,$_SESSION["user_id"])) $data["following"] = true;
-      else $data["following"] = false;
-      
+      if(isset($_SESSION["user_id"])){
+         if($objUser->userIsFollowing($data["image"]->user_name,$_SESSION["user_id"])) $data["following"] = true;
+         else $data["following"] = false;
+      }else $data["following"] = false;
       // se o usuario visitado for eu mesmo
       
       if($data["image"]->image_authorId == $_SESSION["user_id"]) $data["itsMe"] = true;
@@ -82,6 +83,7 @@ class ImageController extends Controller{
       
       $objUser        = new User;
       if(!isset($_SESSION)) session_start();
+      if(!$_SESSION["user_id"])  header("location: ".URL_BASE."login");
       if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
 
       if(is_numeric($user)) $user = $objUser->getUserNameById($user);

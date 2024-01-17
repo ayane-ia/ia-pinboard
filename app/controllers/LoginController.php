@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\core\Controller;
+use app\models\Adm;
 use app\models\Login;
 use app\models\User;
 
@@ -14,7 +15,8 @@ class LoginController extends Controller{
             if(isset($_POST["user_email"]) && isset($_POST["user_password"])){
                 $email  = $_POST["user_email"];
                 $pswd   = $_POST["user_password"];
-                if($objLogin->login($email, $pswd) == "user"){
+                $login = $objLogin->login($email, $pswd);
+                if($login == "user"){
                     if(vSession_start()){ 
                         
                         $_SESSION["user_id"] = $objUser->getUserIdByEmail($email)->user_id;
@@ -24,10 +26,14 @@ class LoginController extends Controller{
                     $url = URL_BASE."user";
                     header("location: $url");
                 }
-                elseif($objLogin->login($email, $pswd) == "adm"){
-                    if(vSession_start()) $_SESSION["adm_email"] = trim($email);
-                    $url    = URL_BASE."home/adm";
-                    header("location: $url");
+                elseif($login != false || $login != null){
+                    
+                    $objAdm = new Adm;
+                    if(!isset($_SESSION)) session_start();
+                    $_SESSION["adm"] = $login;
+
+                    if($_SESSION["adm"]) header("location: ".URL_BASE."adm");
+                    else $data["error"] = true;
                 }
                 else{
                     $data["error"] = true;
