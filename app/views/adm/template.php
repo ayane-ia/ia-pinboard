@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/menu.css">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/adm.css">
+    <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/addcategoria.css">
     <title>IA Pinboard ADM</title>
 </head>
 <body>

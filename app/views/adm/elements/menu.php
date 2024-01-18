@@ -7,13 +7,13 @@
             </div>
             <ul class="liste-menu">
 
-                <li class="link-menu"><a href="adm.html" title="Tela inicial adm"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/casa.png"  alt=""></a></li>
+                <li class="link-menu"><a href="<?php echo URL_BASE?>adm" title="Tela inicial adm"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/casa.png"  alt=""></a></li>
 
-                <li class="link-menu"><a href="paginas/addcategoria.html" title="Adiciona categoria"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/botao-adicionar.png"  alt=""></a></li>
+                <li class="link-menu"><a href="<?php echo URL_BASE?>adm/categorias/<?php echo $_SESSION["adm"]->adm_id?>" title="Adiciona categoria"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/botao-adicionar.png"  alt=""></a></li>
 
-                <li class="link-menu"><a href="adm/users/<?php echo $_SESSION["adm"]->adm_id?>" title="Ver usuarios"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/usuarios.png"  alt=""></a></li>
+                <li class="link-menu"><a href="<?php echo URL_BASE?>adm/users/<?php echo $_SESSION["adm"]->adm_id?>" title="Ver usuarios"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/usuarios.png"  alt=""></a></li>
                 
-                <li class="link-menu"><a href="paginas/conteudos.html" title="ver conteudo"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/imagens.png"  alt=""></a></li>
+                <li class="link-menu"><a href="<?php echo URL_BASE?>adm/conteudo/<?php echo $_SESSION["adm"]->adm_id?>" title="ver conteudo"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/imagens.png"  alt=""></a></li>
                 
             </ul>
         </div>

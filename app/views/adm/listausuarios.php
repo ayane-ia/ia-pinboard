@@ -6,22 +6,25 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Seguidores</th>
+                            <th>Seguindo</th>
                             <th>Confi</th>
                             </tr>
                     </thead>
                     <tbody>
                     <?php if(isset($users)) foreach($users as $usr) { ?>
-
+ 
                         <tr>
                             <td><?php echo $usr->user_name?></td>
                             <td><?php echo $usr->user_email?></td>
                             <td><?php echo $usr->user_followers;?></td>
+                            <td><?php echo $usr->user_following;?></td>
+                            
                             <td> 
-                                
-                                <a href="" title="Mensagem"><button class="button-edit" ><img class="img-botao-tabela" src="../../../../../assets/images/recursos/dialogo.png" alt="">Msg</button></a>
+                                <a href="" title="Mensagem"><button class="button-edit" ><img class="img-botao-tabela" src="<?php echo URL_BASE?>assets/images/recursos/dialogo.png" alt=""></button></a>
 
-                                <a href="" title="banir"><button class="button-edit" ><img class="img-botao-tabela" src="../../../../../assets/images/recursos/banir-usuario.png" alt="">Ban</button> </a>
+                                <a href="" title="banir"><button class="button-edit" ><img class="img-botao-tabela" src="<?php echo URL_BASE?>assets/images/recursos/banir-usuario.png" alt=""></button> </a>
                             </td>
+
                         </tr>
 
                     <?php }?>

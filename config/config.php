@@ -12,3 +12,4 @@ define('NAMESPACE_CONTROLLER', 'app\\controllers\\');
 
 define('URL_BASE', 'http://localhost/projetos/ia-pinboard/');
 define('USER_PATH', '/opt/lampp/htdocs/projetos/ia-pinboard/userData/');
+define('PATH_BASE', '/opt/lampp/htdocs/projetos/ia-pinboard/');

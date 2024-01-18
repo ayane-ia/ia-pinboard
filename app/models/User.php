@@ -201,6 +201,16 @@ class User extends Model{
                 $query->execute();
 
             }
+            
+            $count = countAll($this->db,"following","*","followed",$users[$i]->user_id);
+            
+            if($count > 0){
+                $sql = "UPDATE user SET user.user_following = :vl WHERE user.user_id = :id";
+                $query = $this->db->prepare($sql);
+                $query->bindValue(":vl",$count);
+                $query->bindValue(":id",$users[$i]->user_id);
+                $query->execute();
+            }
 
         }
 
