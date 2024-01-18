@@ -627,10 +627,11 @@ function insertDefault($cn, $tb, $clmn,$values)
        }        
     }
     function verifyFile($input_file, $path_dest, $max_size_file, $array_mime){
+        
         // is recomend you create a const variable path
         // the $array_mime format must be like this -> [".png", ".zip"]
-
         // verify the file
+
        $nome_arquivo = $input_file['name'];
        $tamanho_arquivo = $input_file['size'];
        $extensao = strchr(substr($input_file['name'], -5), ".");
@@ -653,7 +654,8 @@ function insertDefault($cn, $tb, $clmn,$values)
        else
        {
            return true;
-       }        
+       }
+               
     }
     function upVeryFiles($input_file,$path_dest, $max_size_file, $array_mime){
         if(!isset($input_file["name"][1])){

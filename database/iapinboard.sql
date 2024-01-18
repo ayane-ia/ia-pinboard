@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 14, 2024 at 07:36 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Tempo de geração: 18/01/2024 às 23:28
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,32 +18,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `iapinboard`
+-- Banco de dados: `iapinboard`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `adm`
+-- Estrutura para tabela `adm`
 --
 
 CREATE TABLE `adm` (
   `adm_id` int(11) NOT NULL,
   `adm_name` varchar(30) NOT NULL,
-  `adm_email` varchar(200) NOT NULL
+  `adm_email` varchar(200) NOT NULL,
+  `adm_password` varchar(100) NOT NULL,
+  `adm_level` int(10) DEFAULT NULL,
+  `adm_image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `adm`
+-- Despejando dados para a tabela `adm`
 --
 
-INSERT INTO `adm` (`adm_id`, `adm_name`, `adm_email`) VALUES
-(1, 'ayano', 'ayano@gmail.com');
+INSERT INTO `adm` (`adm_id`, `adm_name`, `adm_email`, `adm_password`, `adm_level`, `adm_image`) VALUES
+(1, 'ayano', 'ayano@gmail.com', '123', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Estrutura para tabela `categories`
 --
 
 CREATE TABLE `categories` (
@@ -53,18 +56,19 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categories`
+-- Despejando dados para a tabela `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `category_image`) VALUES
 (1, 'Personagem', NULL),
 (2, 'Paisagem', NULL),
-(3, 'Mar', NULL);
+(3, 'Mar', NULL),
+(9, 'Salve', '180120242214Salve.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Estrutura para tabela `comments`
 --
 
 CREATE TABLE `comments` (
@@ -76,20 +80,16 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `comments`
+-- Despejando dados para a tabela `comments`
 --
 
 INSERT INTO `comments` (`comment_id`, `image_id`, `user_id`, `comment_content`, `comment_date`) VALUES
-(1, 26, 138, 'teste\r\n', '2024-01-14'),
-(2, 26, 138, 'teste2', '2024-01-14'),
-(3, 24, 138, 'O ayron eh pika', '2024-01-14'),
-(4, 24, 138, 'mais ele eh poggers', '2024-01-14'),
-(5, 24, 138, 'ta mais idai?', '2024-01-14');
+(6, 27, 142, 'Aqui eh o meu proprio comentario', '2024-01-17');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `following`
+-- Estrutura para tabela `following`
 --
 
 CREATE TABLE `following` (
@@ -98,17 +98,10 @@ CREATE TABLE `following` (
   `followed` int(100) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `following`
---
-
-INSERT INTO `following` (`id`, `follower`, `followed`) VALUES
-(17, 138, 137);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
+-- Estrutura para tabela `images`
 --
 
 CREATE TABLE `images` (
@@ -122,19 +115,16 @@ CREATE TABLE `images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `images`
+-- Despejando dados para a tabela `images`
 --
 
 INSERT INTO `images` (`image_id`, `image_name`, `image_title`, `image_path`, `image_authorId`, `image_category`, `image_description`) VALUES
-(23, 'user137image4', 'imagem legal', 'user137/user137image4.png', '137', '2', 'aaaaaaaaaaaaaaaaaaaaaa'),
-(24, 'user137image2', 'Imagem de Teste', 'user137/user137image2.png', '137', '1', 'lorem ipsum'),
-(25, 'user137image3', 'bluzao', 'user137/user137image3.jpg', '137', '2', 'aaaaaaaaaa'),
-(26, 'user137image4', 'teste', 'user137/user137image4.jpg', '137', '1', 'bobao');
+(27, 'user142image1', 'Wallpaper pika', 'user142/user142image1.png', '142', '1', 'papel de parede do luffy');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `likes`
+-- Estrutura para tabela `likes`
 --
 
 CREATE TABLE `likes` (
@@ -143,18 +133,10 @@ CREATE TABLE `likes` (
   `user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `likes`
---
-
-INSERT INTO `likes` (`id`, `image`, `user`) VALUES
-(1, 25, 138),
-(14, 24, 138);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Estrutura para tabela `user`
 --
 
 CREATE TABLE `user` (
@@ -167,38 +149,36 @@ CREATE TABLE `user` (
   `user_image` text DEFAULT NULL,
   `user_bio` text DEFAULT NULL,
   `user_likes` int(11) DEFAULT NULL,
-  `user_followers` int(11) DEFAULT NULL,
-  `user_following` int(11) DEFAULT NULL,
+  `user_followers` int(100) DEFAULT NULL,
+  `user_following` int(100) DEFAULT NULL,
   `user_publications` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Despejando dados para a tabela `user`
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_level`, `user_age`, `user_image`, `user_bio`, `user_likes`, `user_followers`, `user_following`, `user_publications`) VALUES
-(137, 'Ayron', 'ayron@gmail.com', '123', NULL, '2024-01-05', NULL, 'Alguma coisa...', NULL, NULL, NULL, NULL),
-(138, 'teste', 'teste@gmail.com', '123', NULL, '2024-01-12', NULL, NULL, NULL, NULL, NULL, NULL),
-(139, 'bluezao', 'bluezao@gmail.com', '123', NULL, '2004-01-07', NULL, NULL, NULL, NULL, NULL, NULL);
+(142, 'Ayron nasc', 'ayron@gmail.com', '123', NULL, '2024-01-15', NULL, '                                Agora eu tenho uma biografia !', NULL, 0, NULL, NULL);
 
 --
--- Indexes for dumped tables
+-- Índices para tabelas despejadas
 --
 
 --
--- Indexes for table `adm`
+-- Índices de tabela `adm`
 --
 ALTER TABLE `adm`
   ADD PRIMARY KEY (`adm_id`);
 
 --
--- Indexes for table `categories`
+-- Índices de tabela `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `comments`
+-- Índices de tabela `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`),
@@ -206,7 +186,7 @@ ALTER TABLE `comments`
   ADD KEY `user` (`user_id`);
 
 --
--- Indexes for table `following`
+-- Índices de tabela `following`
 --
 ALTER TABLE `following`
   ADD PRIMARY KEY (`id`),
@@ -214,13 +194,13 @@ ALTER TABLE `following`
   ADD KEY `FK__user_2` (`followed`);
 
 --
--- Indexes for table `images`
+-- Índices de tabela `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`image_id`);
 
 --
--- Indexes for table `likes`
+-- Índices de tabela `likes`
 --
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`id`),
@@ -230,77 +210,77 @@ ALTER TABLE `likes`
   ADD KEY `FK__user1` (`user`);
 
 --
--- Indexes for table `user`
+-- Índices de tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT for table `adm`
+-- AUTO_INCREMENT de tabela `adm`
 --
 ALTER TABLE `adm`
   MODIFY `adm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT de tabela `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT de tabela `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `following`
+-- AUTO_INCREMENT de tabela `following`
 --
 ALTER TABLE `following`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `images`
+-- AUTO_INCREMENT de tabela `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `likes`
+-- AUTO_INCREMENT de tabela `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
--- Constraints for dumped tables
+-- Restrições para tabelas despejadas
 --
 
 --
--- Constraints for table `comments`
+-- Restrições para tabelas `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `image` FOREIGN KEY (`image_id`) REFERENCES `images` (`image_id`),
   ADD CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `following`
+-- Restrições para tabelas `following`
 --
 ALTER TABLE `following`
   ADD CONSTRAINT `FK__user` FOREIGN KEY (`follower`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `FK__user_2` FOREIGN KEY (`followed`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `likes`
+-- Restrições para tabelas `likes`
 --
 ALTER TABLE `likes`
   ADD CONSTRAINT `FK__image1` FOREIGN KEY (`image`) REFERENCES `images` (`image_id`),

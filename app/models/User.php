@@ -200,7 +200,16 @@ class User extends Model{
                 $query->bindValue(":id",$users[$i]->user_id);
                 $query->execute();
 
+            }elseif($count <= 0){
+                $count = 0;
+                
+                $sql = "UPDATE user SET user.user_followers = :vl WHERE user.user_id = :id";
+                $query = $this->db->prepare($sql);
+                $query->bindValue(":vl",$count);
+                $query->bindValue(":id",$users[$i]->user_id);
+                $query->execute(); 
             }
+
             
             $count = countAll($this->db,"following","*","followed",$users[$i]->user_id);
             
@@ -213,8 +222,20 @@ class User extends Model{
             }
 
         }
+    }
+    public function deleteUser($id , $adm){
+        
+        if(!selectOnceEqual($this->db,"*","adm","adm_id",$adm->adm_id,1)) return false; 
+        
+        deleteById($this->db,"following","followed",$id); // deleta todas as relacoes de seguidores com esse usuario
+        deleteById($this->db,"following","follower",$id); // deleta todas as relacoes de seguidores com esse usuario
+        deleteById($this->db,"likes","user",$id); // deleta os likes
+        deleteById($this->db,"comments","user_id",$id); // deleta os comentarios
+        deleteById($this->db,"images","image_authorId", $id); // deleta as imagens
 
-
+        deleteById($this->db,"user","user_id",$id); // deleta o usuario
+        
+        return true;
     }
 }
 ?>

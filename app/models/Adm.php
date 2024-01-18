@@ -87,8 +87,10 @@ class Adm extends Model{
                }
                else
                {   
+
                  return 1; //die("erro ao enviar o arquivo <hr>".$arquivo_temporario."  -- <b>TO</b> --  ".$path_dest."<hr> code :". $input_file['error']); // nao foi possivel enviar o arquivo
-               }
+               
+                }
             }
             else{
                 

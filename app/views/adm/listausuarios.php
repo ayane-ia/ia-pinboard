@@ -22,7 +22,7 @@
                             <td> 
                                 <a href="" title="Mensagem"><button class="button-edit" ><img class="img-botao-tabela" src="<?php echo URL_BASE?>assets/images/recursos/dialogo.png" alt=""></button></a>
 
-                                <a href="" title="banir"><button class="button-edit" ><img class="img-botao-tabela" src="<?php echo URL_BASE?>assets/images/recursos/banir-usuario.png" alt=""></button> </a>
+                                <a href="<?php echo URL_BASE?>adm/ixnel/<?php echo $usr->user_id?>" title="banir"><button class="button-edit" ><img class="img-botao-tabela" src="<?php echo URL_BASE?>assets/images/recursos/banir-usuario.png" alt=""></button> </a>
                             </td>
 
                         </tr>
