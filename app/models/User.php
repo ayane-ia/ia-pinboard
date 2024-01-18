@@ -36,6 +36,7 @@ class User extends Model{
         else return false;
     }
     public function getUsers(){
+        
         return selectAll($this->db, "user", 1);
     }
     public function getUserIdByEmail($email){
@@ -182,6 +183,28 @@ class User extends Model{
 
         return true;
     }
+    public function updateFollowing($adm){
+        $ver = selectOnceEqual($this->db,"*","adm","adm_id",$adm,1);
+        if(!$ver) return false;
 
+        $users = $this->getUsers();
+        
+        for ($i=0; $i < count($users); $i++) { 
+
+            $count = countAll($this->db,"following","*","follower",$users[$i]->user_id);
+            
+            if($count > 0){
+                $sql = "UPDATE user SET user.user_followers = :vl WHERE user.user_id = :id";
+                $query = $this->db->prepare($sql);
+                $query->bindValue(":vl",$count);
+                $query->bindValue(":id",$users[$i]->user_id);
+                $query->execute();
+
+            }
+
+        }
+
+
+    }
 }
 ?>

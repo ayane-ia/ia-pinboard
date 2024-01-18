@@ -8,6 +8,7 @@
     <title>IA Pinboard ADM</title>
 </head>
 <body>
+<?php include_once "elements/menu.php"?>
 
 <?php $this->load($view, $viewData);?>
 
