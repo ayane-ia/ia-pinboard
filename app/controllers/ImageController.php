@@ -46,7 +46,9 @@ class ImageController extends Controller{
       //die(var_dump($data["itsMe"]));
 
       if(isset($_POST) && isset($_POST["comment"])){
+         if($objUser->isBanned($_SESSION["user_id"])) header("location: ".URL_BASE);
          if(isset($_SESSION["user_id"])){
+            
             $objImage->insertComment($imageId,$_SESSION["user_id"],$_POST["comment"]);
             $data["comments"] = $objImage->getCommentsByImageId($imageId);
          }else{
@@ -59,6 +61,7 @@ class ImageController extends Controller{
       if( $data["image"]->image_authorId == $_SESSION["user_id"]){
          $data["remove"] = true;
       }
+      $data["banned"] = $objUser->isBanned($_SESSION["user_id"]);
       
       $data["view"] = "inimage";
       $this->load("template",$data);
@@ -68,6 +71,8 @@ class ImageController extends Controller{
       $objUser  = new User;
       if(!isset($_SESSION)) session_start();
       if(!$_SESSION["user_id"]) header("location: ".URL_BASE."login");
+
+      if($objUser->isBanned($_SESSION["user_id"])) header("location: ".URL_BASE."image/?id=$imageId");
 
       if($objImage->like($imageId,$_SESSION["user_id"])) header("location: ".URL_BASE."image/?id=$imageId");
 
@@ -87,6 +92,10 @@ class ImageController extends Controller{
       
       $objUser        = new User;
       if(!isset($_SESSION)) session_start();
+      if($objUser->isBanned($_SESSION["user_id"])){
+          header("location: ".URL_BASE."profile/?user=$user");
+          exit;
+      }
       if(!$_SESSION["user_id"])  header("location: ".URL_BASE."login");
       if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
 
@@ -114,7 +123,11 @@ class ImageController extends Controller{
       $objUser        = new User;
       //if(!$objUser->userIsFollowing($user,$_SESSION["user_id"])) header("location: ".URL_BASE."profile/?user=$user");
       
-      @session_start();
+      if(!isset($_SESSION)) session_start();
+      if($objUser->isBanned($_SESSION["user_id"])){
+          header("location: ".URL_BASE."profile/?user=$user");
+          exit;
+      }
       if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
 
       if(is_numeric($user)) $user = $objUser->getUserNameById($user);
@@ -139,7 +152,7 @@ class ImageController extends Controller{
       $image = $objImage->getImageById($image_id);
       
       if($_SESSION["user_id"] != $image->image_authorId) header("location: ".URL_BASE);
-      if($objImage->removeImage($image_id)) header("location: ".URL_BASE);
+      if($objImage->removeImage($image_id,"user",$image->image_authorId)) header("location: ".URL_BASE);
       else header("location: ".URL_BASE."image/?id=$image_id");
       
      }

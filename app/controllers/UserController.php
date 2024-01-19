@@ -102,6 +102,19 @@ class UserController extends Controller{
       $this->load("template", $data);
 
      }
+     public function benutzerEntfernen($id){
+      $objImagem = new Imagem;
+      $objUser = new User;
+
+      if(!isset($_SESSION)) session_start();
+      if(!isset($_SESSION["user_id"])) header("location: ".URL_BASE);
+      if($id != $_SESSION["user_id"]) header("location: ".URL_BASE);
+
+      if($objUser->deleteUser_user($id)){
+         session_destroy();
+         header("location: ".URL_BASE);}
+      else header("location: ".URL_BASE."profile/?user=$id");
+     }
 
 
 }

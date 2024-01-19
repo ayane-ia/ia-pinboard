@@ -62,7 +62,6 @@ class AdmController extends Controller{
       if($id != $_SESSION["adm"]->adm_id) header("location: ".URL_BASE);
       if(!$objAdm->verifyAdm($_SESSION["adm"])) header("location: ".URL_BASE);
       
-
       $data["categorias"] = $objImagem->getCategories();
 
       if(isset($_POST) && isset($_POST["name"])){  

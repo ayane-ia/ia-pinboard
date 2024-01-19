@@ -12,16 +12,17 @@ if(isset($_SESSION["error"]["unfollow"])){
   unset($_SESSION["error"]);
 }
 
-
 ?>
 
 <main>
     <div class="profile">
       
     <?php if(isset($profileImage)) { ?>
+
                         <img id="preview"   src="<?php echo URL_BASE?>userData/user<?php echo $userId?>/profile/<?php echo $profileImage?>" alt="">
                     <?php }else { ?>
                         <img id="preview"    src="<?php echo URL_BASE?>assets/images/recursos/perfilNull.jpg" alt="">
+
       <?php }?>
  
       <h2><?php echo $user_name?></h2>
@@ -36,7 +37,9 @@ if(isset($_SESSION["error"]["unfollow"])){
         <!--Foi verificado que o usuario esta vendo seu perfil, então o botao e editar aparecera!-->
 
         <a href="<?php echo URL_BASE."user/edit"?>"><button class="btns005">Editar perfil</button></a>
-
+          <?php if(!isset($_SESSION)) session_start(); $user_id = $_SESSION["user_id"];?>
+        <a href="<?php echo URL_BASE."user/benutzerEntfernen/$user_id"?>"><button class="btns001">Excluir perfil</button></a>
+        
         <?php  } elseif (isset($visiting)) { ?>
 
         <a href="<?php echo URL_BASE."login"?>"><button class="btns005">Login para seguir</button></a>

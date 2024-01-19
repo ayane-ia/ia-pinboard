@@ -237,6 +237,61 @@ class User extends Model{
         
         return true;
     }
+    public function removeImage($imageId,$utl,$id){
+        if($utl == "user"){
+            $temp = selectOnceEqual($this->db,"*","user","user_id",$id,1);
+            if(!$temp || $temp == false )   return false; 
+        }elseif($utl == "adm"){
+            $temp = selectOnceEqual($this->db,"*","adm","adm_id",$id,1);
+            if(!$temp || $temp == false )   return false; 
+        }
+
+            $image = selectOnceEqual($this->db,"*","images","image_id",$imageId,1);
+            $userId = $image->image_authorId;
+            $user_image = $image->image_path;
+            
+            deleteById($this->db,"likes","image",$imageId);
+            deleteById($this->db,"comments","image_id",$imageId);
+            deleteById($this->db,"images","image_id",$imageId);
+            
+            if(is_file(USER_PATH."$user_image")){ 
+                unlink(USER_PATH."$user_image");
+                return true;
+            }
+            else return false;
+    }
+
+    public function deleteUser_user($id){
+        $temp = selectOnceEqual($this->db,"*","user","user_id",$id,1);
+        if(!$temp) return false;
+        
+        deleteById($this->db,"following","followed",$id); // deleta todas as relacoes de seguidores com esse usuario
+        deleteById($this->db,"following","follower",$id); // deleta todas as relacoes de seguidores com esse usuario
+        deleteById($this->db,"likes","user",$id); // deleta os likes
+        deleteById($this->db,"comments","user_id",$id); // deleta os comentarios
+        deleteById($this->db,"messageBox_adm","user_id",$id);
+        deleteById($this->db,"users_baned","user_id", $id); // deleta as imagens
+        
+        $images = selectAll_equal($this->db,"images","image_authorId",$id);
+        foreach($images as $img){
+            $this->removeImage($img->image_id,"user",$id);
+        }
+
+        deleteById($this->db,"images","image_authorId", $id); // deleta as imagens
+
+        $user_image = selectOnceEqual($this->db,"user_image","user","user_id",$id,1);$user_image=$user_image->user_image;
+        if($user_image){
+            if(is_file(USER_PATH."user$id/profile/$user_image")){ 
+                unlink(USER_PATH."user$id/profile/$user_image");
+            }
+        }
+        rmdir(USER_PATH."user$id");
+
+        deleteById($this->db,"user","user_id",$id); // deleta o usuario
+        
+        return true;
+    }
+
     public function isBanned($user){
         $temp = selectOnceEqual($this->db,"user_ban","user","user_id",$user,1);
 

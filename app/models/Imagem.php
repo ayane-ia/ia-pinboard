@@ -127,6 +127,7 @@ class Imagem extends Model{
         $qry  = $this->db->prepare($sql);
         $qry->execute();
         return $qry->fetchAll(\PDO::FETCH_OBJ);
+
     }    public function getImagesPerCategory_array($categoryName){
          
         if(is_string($categoryName) && !is_numeric($categoryName)){
@@ -220,7 +221,26 @@ class Imagem extends Model{
         else return false;
         
     }
+    public function isBanned($user){
+        $temp = selectOnceEqual($this->db,"user_ban","user","user_id",$user,1);
+
+        $temp1 = selectOnceEqual($this->db,"*","users_baned","user_id",$user,1);
+
+        if($temp && $temp1) return true;
+        elseif($temp == false || $temp == null && $temp1 == true){
+            deleteById($this->db,"users_baned","user_id",$user);
+            return false;
+        }
+        elseif($temp1 == false || $temp1 == null && $temp == true){
+            updateOnceById($this->db,"user","user_ban",0,"user_id",$user);
+            return false;
+        }
+        else return false;
+
+    }
     public function insertComment($imageId, $userId, $content){
+        if($this->isBanned($userId)) return false;
+
         if(is_string($userId)) $userId = $this->getUserIdByName($userId);
         elseif($userId == false || $userId == null) die("fatal error <a href=".URL_BASE.">Voltar a home?</a>");
         if(!$this->isImage($imageId)) return false;
@@ -268,15 +288,26 @@ class Imagem extends Model{
         }
         else return false;
     }
-    public function removeImage($imageId){
+    public function removeImage($imageId,$utl,$id){
+        if($utl == "user"){
+            $temp = selectOnceEqual($this->db,"*","user","user_id",$id,1);
+            if(!$temp || $temp == false )   return false; 
+        }elseif($utl == "adm"){
+            $temp = selectOnceEqual($this->db,"*","adm","adm_id",$id,1);
+            if(!$temp || $temp == false )   return false; 
+        }
+
             $image = selectOnceEqual($this->db,"*","images","image_id",$imageId,1);
             $userId = $image->image_authorId;
             $user_image = $image->image_path;
             
+            deleteById($this->db,"likes","image",$imageId);
+            deleteById($this->db,"comments","image_id",$imageId);
+            deleteById($this->db,"images","image_id",$imageId);
             
             if(is_file(USER_PATH."$user_image")){ 
                 unlink(USER_PATH."$user_image");
-              
+                return true;
             }
             else return false;
     }

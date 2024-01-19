@@ -19,7 +19,12 @@ if(isset($error) && isset($error["notLogged"])){ ?>
 
           <div class="container-like">
 
-          <a href="<?php if(isset($liked) && $liked != false)echo URL_BASE."image/unlike/$image->image_id"; else echo URL_BASE."image/like/$image->image_id"?>">
+          <a href="<?php 
+          if(isset($banned) && $banned != false){
+            echo URL_BASE;
+          }
+          elseif(isset($liked) && $liked != false)
+          echo URL_BASE."image/unlike/$image->image_id"; else echo URL_BASE."image/like/$image->image_id"?>">
 
             <button id="likeButton"  class="heartButton">
             
@@ -42,9 +47,9 @@ if(isset($error) && isset($error["notLogged"])){ ?>
       <div class="imagem-perfil">
        <a href="<?php echo URL_BASE."profile/?user=$image->image_authorId"?>"> 
        <?php if(isset($imageUser)) { ?>
-                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>userData/user<?php echo $image->image_authorId?>/profile/<?php echo $imageUser?>" alt="">
+                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>userData/user<?php echo $image->image_authorId?>/profile/<?php echo $imageUser?>" alt="salve">
                     <?php }else { ?>
-                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/recursos/perfilNull.jpg" alt="">
+                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/recursos/perfilNull.jpg" alt="salve">
       <?php }?>
       </a>
 
@@ -80,8 +85,11 @@ if(isset($error) && isset($error["notLogged"])){ ?>
         <?php if(isset($comments)) foreach($comments as $cmt){?>
         <div class="comentario-digitado">
 
+          <?php if($cmt->user_image) { ?>
           <div><a href="<?php echo URL_BASE."profile/?user=$cmt->user_id"?>"><img class="imagem-do-usuario-comentario" src="<?php echo URL_BASE?>userData/user<?php echo $cmt->user_id?>/profile/<?php echo $cmt->user_image ?>" alt=""></a></div>
-          
+          <?php }else { ?>
+          <div><a href="<?php echo URL_BASE."profile/?user=$cmt->user_id"?>"><img class="imagem-do-usuario-comentario" src="<?php echo URL_BASE?>assets/images/recursos/perfilNull.jpg?>" alt=""></a></div>
+          <?php }?>
           <div class="comentariodousuario">
             <div class="comentariodousuario1">
             <span><?php echo $cmt->comment_content?> </span>
