@@ -17,7 +17,13 @@ if(isset($_SESSION["error"]["unfollow"])){
 
 <main>
     <div class="profile">
-      <img src="<?php echo URL_BASE?>assets/images/logo/logo.png" alt="Foto de Perfil">
+      
+    <?php if(isset($profileImage)) { ?>
+                        <img id="preview"   src="<?php echo URL_BASE?>userData/user<?php echo $userId?>/profile/<?php echo $profileImage?>" alt="">
+                    <?php }else { ?>
+                        <img id="preview"    src="<?php echo URL_BASE?>assets/images/recursos/perfilNull.jpg" alt="">
+      <?php }?>
+ 
       <h2><?php echo $user_name?></h2>
       <p><?php echo $user_bio?></p>
       <ul>

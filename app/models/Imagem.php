@@ -68,6 +68,15 @@ class Imagem extends Model{
     
     public function updateProfileImage($image, $userId){
 
+        $user_image = selectOnceEqual($this->db,"user_image","user","user_id",$userId,1);$user_image=$user_image->user_image;
+        if($user_image){
+            if(is_file(USER_PATH."user$userId/profile/$user_image")){ 
+                unlink(USER_PATH."user$userId/profile/$user_image");
+            }
+        }
+
+
+
         $extensao       = strchr(substr($image['name'], -5), "."); // pega a extensao
 
         $verify = $this->verifyImage($image,$userId);
@@ -223,6 +232,10 @@ class Imagem extends Model{
     }
     public function getCommentsByImageId($imageId){
         $temp = selectAll_equal($this->db,"comments","image_id",$imageId);
+        for ($i=0; $i < count($temp); $i++) { 
+            $_temp = selectOnceEqual($this->db,"user_image","user","user_id",$temp[$i]->user_id,1);
+            if($_temp) $temp[$i]->user_image = $_temp->user_image;
+        }
         return $temp;
     }
 
@@ -255,5 +268,6 @@ class Imagem extends Model{
         }
         else return false;
     }
+
 }
 ?>

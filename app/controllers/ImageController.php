@@ -53,8 +53,9 @@ class ImageController extends Controller{
             $data["error"]["notLogged"] = true;
          }
       }
-
-
+      $userData = $objUser->getUserById($data["image"]->image_authorId);
+      $data["imageUser"] = $userData->user_image;
+      
 
       $data["view"] = "inimage";
       $this->load("template",$data);

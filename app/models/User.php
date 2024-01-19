@@ -319,6 +319,18 @@ class User extends Model{
             return true;
         }else return false;
     }
-
+    public function getUserById($id){
+        return selectOnceEqual($this->db,"*","user","user_id",$id,1);
+       }
+       public function getUserById_array($id){
+        return selectOnceEqual($this->db,"*","user","user_id",$id,2);
+    }
+    public function existProfileByUserId($user_id){
+        if(selectOnceEqual($this->db,"user_image","user","user_id",$user_id,1)){
+            return true;
+        }
+        else return false;
+        
+    }
 }
 ?>

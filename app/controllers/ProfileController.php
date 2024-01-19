@@ -66,6 +66,10 @@ class ProfileController extends Controller{
         elseif($publicacoes == false) return $data["publications"] = 0;
         if(!$data["publications"]) $data["publications"] = 0;
 
+        $_temp = $objUser->getUserById($id);
+        $data["profileImage"] = $_temp->user_image;
+        $data["userId"] = $_temp->user_id;
+
         $data["view"]       = "profile/profilevisited";
         $this->load("template", $data);
    }

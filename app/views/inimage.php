@@ -37,8 +37,14 @@ if(isset($error) && isset($error["notLogged"])){ ?>
     </div>
     <div class="usuario-que-postou">
       <div class="imagem-perfil">
-       <a href="<?php echo URL_BASE."profile/?user=$image->image_authorId"?>"> <img class="imagem-perfil-img" src="<?php echo URL_BASE?>assets/images/fotodeperfiluser/lontra.jpeg" alt=""></a>
-       
+       <a href="<?php echo URL_BASE."profile/?user=$image->image_authorId"?>"> 
+       <?php if(isset($imageUser)) { ?>
+                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>userData/user<?php echo $image->image_authorId?>/profile/<?php echo $imageUser?>" alt="">
+                    <?php }else { ?>
+                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/recursos/perfilNull.jpg" alt="">
+      <?php }?>
+      </a>
+
       </div>
       <span class="nome-do-usuario"><?php echo $image->user_name?></span>
 
@@ -70,7 +76,9 @@ if(isset($error) && isset($error["notLogged"])){ ?>
         </div>
         <?php if(isset($comments)) foreach($comments as $cmt){?>
         <div class="comentario-digitado">
-          <div><a href="<?php echo URL_BASE."profile/?user=$cmt->user_id"?>"><img class="imagem-do-usuario-comentario" src="<?php echo URL_BASE?>assets/images/fotodeperfiluser/perfilAyano.jpeg" alt=""></a></div>
+
+          <div><a href="<?php echo URL_BASE."profile/?user=$cmt->user_id"?>"><img class="imagem-do-usuario-comentario" src="<?php echo URL_BASE?>userData/user<?php echo $cmt->user_id?>/profile/<?php echo $cmt->user_image ?>" alt=""></a></div>
+          
           <div class="comentariodousuario">
             <div class="comentariodousuario1">
             <span><?php echo $cmt->comment_content?> </span>

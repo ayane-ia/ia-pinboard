@@ -89,8 +89,8 @@ class UserController extends Controller{
 
          if(isset($_FILES["profile"])){
             
-            $temp = $objImagem->updateProfileImage($_FILES["profile"],$_SESSION["user_id"]);
-           
+         $objImagem->updateProfileImage($_FILES["profile"],$_SESSION["user_id"]);
+
          }
          if($objUser->updateNameBio($_SESSION["user_id"], $name , $bio)) header("location: ".URL_BASE."user/edit");
 
@@ -102,5 +102,6 @@ class UserController extends Controller{
       $this->load("template", $data);
 
      }
+
 
 }
