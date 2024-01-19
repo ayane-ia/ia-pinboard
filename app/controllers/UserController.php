@@ -96,6 +96,7 @@ class UserController extends Controller{
 
          else die("Houve um erro no sistema, clique <a href=".URL_BASE.">aqui</a> para voltar");
       }
+      $data["userData"] = $objUser->getUserInfo(["user_id","user_name","user_image"],$_SESSION["user_id"]);
 
       $data["view"]         = "user_logged/profile/editprofile";
       $this->load("template", $data);

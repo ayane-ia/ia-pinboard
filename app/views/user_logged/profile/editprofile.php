@@ -8,8 +8,12 @@
 
             <div class="div-container-conteudo-imagem-de-perfil">
                 <div class="container-imagem-editar">
-                    <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/logo/logo.png" alt="">
-
+                    <?php if(isset($userData["user_image"])) { ?>
+                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>userData/user<?php echo $userData["user_id"]?>/profile/<?php echo $userData["user_image"]?>" alt="">
+                    <?php }else { ?>
+                        <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/recursos/perfilNull.jpg" alt="">
+                    <?php }?>
+                    
                 </div>
 
                 <label for="input-file" class="span-edita-perfil btns005">Alterar foto</label>
@@ -31,7 +35,7 @@
                 <?php if(isset($bio)) echo $bio;?>
                 </textarea>
             </div>
-
+            
             <span id="salva" class="btns004 salva">Salva</span>
 
             
