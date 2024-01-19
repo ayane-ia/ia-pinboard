@@ -2,6 +2,7 @@
 body {
     min-height: calc(100vh - 81px);
     position: relative;
+    
 }
 
 .div-container {
@@ -47,10 +48,15 @@ body {
 .editar-imagem-perfil {
     border-radius: 50%;
     width: 120px;
+    height: 120px;
 }
 
 .span-edita-perfil {
     cursor: pointer;
+}
+
+.input-img-edita-perfil {
+    display: none;
 }
 
 .div-edita-biografia {
@@ -107,6 +113,7 @@ body {
     flex-direction: column;
     gap: 20px;
     overflow: hidden;
+    
 }
 
 .alert-personalizado p {

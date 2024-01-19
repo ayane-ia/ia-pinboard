@@ -8,11 +8,15 @@
 
             <div class="div-container-conteudo-imagem-de-perfil">
                 <div class="container-imagem-editar">
-                    <img class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/logo/logo.png" alt="">
+                    <img id="preview" class="editar-imagem-perfil" src="<?php echo URL_BASE?>assets/images/logo/logo.png" alt="">
 
                 </div>
 
-                <span class="span-edita-perfil btns005">Alterar foto</span>
+                <label for="input-file" class="span-edita-perfil btns005">Alterar foto</label>
+
+                <input class="input-img-edita-perfil" type="file" id="input-file" onchange="previewImage(event)" accept="image/*">
+
+               
             </div>
             
             <div class="div-edita-biografia">
@@ -46,3 +50,15 @@
 
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    <script src="<?php echo URL_BASE?>assets/scripts/alert.js"></script>
+   <script>
+    function previewImage(event) {
+        var input = event.target;
+        var preview = document.getElementById('preview');
+        
+        var reader = new FileReader();
+        reader.onload = function(){
+            preview.src = reader.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+}
+</script>
