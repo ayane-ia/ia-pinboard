@@ -142,8 +142,13 @@ class Imagem extends Model{
     }
 
     public function isLike($imageId, $user_id){
-        $temp = selectPerTwoValues_Equals($this->db,"likes","image","user",$imageId,$user_id);
-        if($temp == true) return true;
+        $sql = "SELECT * FROM likes WHERE image = $imageId AND user = $user_id ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        $temp = $query->fetch(\PDO::FETCH_OBJ);
+
+        if($temp == true || $temp != null) return true;
         elseif($temp == false || $temp == null) return false;
     }
 
@@ -209,8 +214,11 @@ class Imagem extends Model{
             if($allCategory[$j]->image_id != $currentImageId) $total[$j] = $allCategory[$j];
         }
 
-        if($total == null || $total == false) return false;
-        else return $total;
+        if(isset($total)){
+            if( $total == null || $total == false) return false;
+            else return $total;
+        }
+        else return false;
     }
 }
 ?>

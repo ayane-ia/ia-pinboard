@@ -15,9 +15,18 @@ if(isset($error) && isset($error["notLogged"])){ ?>
       <div class="gostou heart-btn">
 
           <div class="container-like">
-            <button id="likeButton" onclick="like()" class="heartButton">
+
+          <a href="<?php if(isset($liked) && $liked != false)echo URL_BASE."image/unlike/$image->image_id"; else echo URL_BASE."image/like/$image->image_id"?>">
+
+            <button id="likeButton"  class="heartButton">
+            
+            <?php if(isset($liked) && $liked != false) { ?>
+              <i id="heartIcon" class="far fa-heart fas"></i>
+            <?php }else { ?>
               <i id="heartIcon" class="far fa-heart"></i>
+            <?php } ?>
             </button>
+          </a>
             <span id="likeCount"><?php echo $likes?></span>
           </div>
 
@@ -114,7 +123,7 @@ if(isset($error) && isset($error["notLogged"])){ ?>
     }
   });
 
-      let count = 0;
+
     const likeButton = document.getElementById("likeButton");
    
     const heartIcon = document.getElementById("heartIcon");

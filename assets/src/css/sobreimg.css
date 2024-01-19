@@ -66,6 +66,10 @@
   color: red;
 }
 
+.heartButton:hover{
+  cursor: pointer;
+}
+
 
 
 .digita-comentario form {
