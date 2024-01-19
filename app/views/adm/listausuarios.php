@@ -3,6 +3,7 @@
                 <table id="minha-tabls001" class="minha-tabls001">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Seguidores</th>
@@ -14,6 +15,7 @@
                     <?php if(isset($users)) foreach($users as $usr) { ?>
  
                         <tr>
+                            <td><?php echo $usr->user_id?></td>
                             <td><?php echo $usr->user_name?></td>
                             <td><?php echo $usr->user_email?></td>
                             <td><?php echo $usr->user_followers;?></td>

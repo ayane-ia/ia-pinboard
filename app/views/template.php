@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/criar.css">
     <link rel="shortcut icon" href="<?php echo URL_BASE."assets/"?>images/logo/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/explorar.css">
-     
+    <link rel="stylesheet" href="<?php echo URL_BASE."assets/"?>src/css/caixa.css">
+
     <link rel="stylesheet" type="text/css" href="<?php echo URL_BASE."assets/"?>src/css/perfiluser.css">
     
     <link rel="stylesheet" type="text/css" href="<?php echo URL_BASE."assets/"?>src/css/sobreimg.css">
