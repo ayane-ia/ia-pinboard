@@ -268,6 +268,18 @@ class Imagem extends Model{
         }
         else return false;
     }
+    public function removeImage($imageId){
+            $image = selectOnceEqual($this->db,"*","images","image_id",$imageId,1);
+            $userId = $image->image_authorId;
+            $user_image = $image->image_path;
+            
+            
+            if(is_file(USER_PATH."$user_image")){ 
+                unlink(USER_PATH."$user_image");
+              
+            }
+            else return false;
+    }
 
 }
 ?>

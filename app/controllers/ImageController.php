@@ -56,7 +56,10 @@ class ImageController extends Controller{
       $userData = $objUser->getUserById($data["image"]->image_authorId);
       $data["imageUser"] = $userData->user_image;
       
-
+      if( $data["image"]->image_authorId == $_SESSION["user_id"]){
+         $data["remove"] = true;
+      }
+      
       $data["view"] = "inimage";
       $this->load("template",$data);
    } 
@@ -127,6 +130,18 @@ class ImageController extends Controller{
           $_SESSION["error"]["unfollow"] = true;
           header("location: ".URL_BASE."profile/?user=$user");
       }
+     }
+     public function nelixremm($image_id){
+      $objImage = new Imagem;
+      $objUser  = new User;
+      if(!isset($_SESSION)) session_start();
+      if(!$_SESSION["user_id"]) header("location: ".URL_BASE."login");
+      $image = $objImage->getImageById($image_id);
+      
+      if($_SESSION["user_id"] != $image->image_authorId) header("location: ".URL_BASE);
+      if($objImage->removeImage($image_id)) header("location: ".URL_BASE);
+      else header("location: ".URL_BASE."image/?id=$image_id");
+      
      }
      
 }

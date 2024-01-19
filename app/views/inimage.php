@@ -8,6 +8,9 @@ if(isset($error) && isset($error["notLogged"])){ ?>
       <img class="img-image-tema" src="<?php echo URL_BASE."userData/".$image->image_path?>" alt="">
 
       <div class="sobre-img">
+        <?php if(isset($remove)) { ?>
+          <a href="<?php echo URL_BASE."image/nelixremm/$image->image_id"?>">Excluir Imagem</a>
+        <?php } ?>
         <h1 class="titulo-img"><?php echo $image->image_title?></h1>
 
         <p class="descricao-img"><?php echo $image->image_description?></p>
