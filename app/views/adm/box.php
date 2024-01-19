@@ -8,8 +8,8 @@
     <input type="text" name="content" id=""><br>
     <br>
 
-    <label for="">Usuario * nome exato : </label><br>
-    <input type="text" name="user" id="">
+    <label for="">user: Nome ou ID exato : </label><br>
+    <input type="text" name="user" id="" <?php if(isset($user_id)) echo "value=\"$user_id\""?>>
 
     <br><br>
     <input type="submit" value="Enviar Mensagem">

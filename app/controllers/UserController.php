@@ -10,6 +10,7 @@ class UserController extends Controller{
     
    public function index(){
       $objImagem = new Imagem;
+      $objUser   = new User;
       if(empty($_SESSION)){
          session_start();
          if(!isset($_SESSION["user_id"])){
@@ -17,12 +18,17 @@ class UserController extends Controller{
                header("location: $url");
          }
       }
-      
+      if($objUser->isBanned($_SESSION["user_id"])) $data["banned"] = true;
+
       $data["imagens"]      = $objImagem->getAllImages();
+
+
+ 
       $data["view"] = "user_logged/home";
       $this->load("template", $data);
    }
    public function criar(){
+      $objUser   = new User;
       $objImagem = new Imagem;
       if(empty($_SESSION)){
          session_start();
@@ -54,13 +60,19 @@ class UserController extends Controller{
             $data["error"] = $verify;
          }
       }
-      $data["view"] = "user_logged/criar/criar";
+      if($objUser->isBanned($_SESSION["user_id"])){ 
+         $data["banned"] = true;
+         $data["view"] = "user_logged/criar/userBanned";
+      }
+      else  $data["view"] = "user_logged/criar/criar";
+     
       $this->load("template", $data);
    }
    public function edit(){
       
       $objImagem = new Imagem;
       $objUser = new User;
+
       if(empty($_SESSION)) session_start();
       if(!isset($_SESSION["user_id"])) header("location: ".URL_BASE);
       
@@ -75,7 +87,13 @@ class UserController extends Controller{
 
          if(isset($_POST["bio"])) $bio = $_POST["bio"];else $bio = null;
 
+         if(isset($_FILES["profile"])){
+            
+            $temp = $objImagem->updateProfileImage($_FILES["profile"],$_SESSION["user_id"]);
+           
+         }
          if($objUser->updateNameBio($_SESSION["user_id"], $name , $bio)) header("location: ".URL_BASE."user/edit");
+
          else die("Houve um erro no sistema, clique <a href=".URL_BASE.">aqui</a> para voltar");
       }
 
@@ -83,4 +101,5 @@ class UserController extends Controller{
       $this->load("template", $data);
 
      }
+
 }

@@ -65,6 +65,41 @@ class Imagem extends Model{
             }
         
     }
+    
+    public function updateProfileImage($image, $userId){
+
+        $extensao       = strchr(substr($image['name'], -5), "."); // pega a extensao
+
+        $verify = $this->verifyImage($image,$userId);
+        if(is_string($verify)) return $verify;
+
+        $tempFile       =   $image['tmp_name'];
+
+        $image['name']   =  date("dmYHi").$extensao; 
+        $name =  $image['name'];
+
+        $tempFile       =   $image['tmp_name'];
+        $path_dest      =   USER_PATH."user$userId/profile/"; // caminho de destino
+
+           $tempPath        =   $path_dest.$image['name'];
+           
+           if(is_dir($path_dest)){  
+               if(move_uploaded_file($tempFile, $tempPath))
+               {
+                chmod($tempPath, 0777);
+                updateOnceById($this->db,"user","user_image",$name,"user_id",$userId);
+                return true;
+               }
+               else
+               {   
+                 return "notSend";//die("erro ao enviar o arquivo <hr>".$arquivo_temporario."  -- <b>TO</b> --  ".$path_dest."<hr> code :". $input_file['error']); // nao foi possivel enviar o arquivo
+               }
+            }
+            else{
+                
+                return "notDir";
+            }
+    }
 
     public function getImagesPerCategory($categoryName){
          

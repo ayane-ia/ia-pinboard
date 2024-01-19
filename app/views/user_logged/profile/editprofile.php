@@ -1,5 +1,5 @@
 
-<form id="form-edita-perfil" action="" method="post">
+<form id="form-edita-perfil" action="" method="post" enctype="multipart/form-data">
     <div class="div-container">
         <div class="div-container-conteudo">
             <div class="div-editar-perfil">
@@ -14,7 +14,7 @@
 
                 <label for="input-file" class="span-edita-perfil btns005">Alterar foto</label>
 
-                <input class="input-img-edita-perfil" type="file" id="input-file" onchange="previewImage(event)" accept="image/*">
+                <input class="input-img-edita-perfil" type="file" name="profile" id="input-file" onchange="previewImage(event)" accept="image/*">
 
                
             </div>

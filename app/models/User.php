@@ -237,5 +237,88 @@ class User extends Model{
         
         return true;
     }
+    public function isBanned($user){
+        $temp = selectOnceEqual($this->db,"user_ban","user","user_id",$user,1);
+
+        $temp1 = selectOnceEqual($this->db,"*","users_baned","user_id",$user,1);
+
+        if($temp && $temp1) return true;
+        elseif($temp == false || $temp == null && $temp1 == true){
+            deleteById($this->db,"users_baned","user_id",$user);
+            return false;
+        }
+        elseif($temp1 == false || $temp1 == null && $temp == true){
+            updateOnceById($this->db,"user","user_ban",0,"user_id",$user);
+            return false;
+        }
+        else return false;
+
+    }
+    public function deleteAllCommentsByUser($user){
+        deleteById($this->db,"comments","user_id",$user);
+    }
+    public function deleteAllLikesByUser($user){
+        deleteById($this->db,"likes","user",$user);
+        return true;
+    }
+    public function deleteAllFollowingByUser($user){
+        deleteById($this->db,"following","followed",$user);
+
+        deleteById($this->db,"following","follower",$user);
+        return true;
+    }
+    public function deleteAllImagesByUser($user){
+        deleteById($this->db,"images","image_authorId",$user);
+        return true;
+    }
+
+    public function deleteBoxAdmByUser($user){
+        deleteById($this->db,"messageBox_adm","user_id",$user);
+        return true;
+    }
+
+    public function deleteBoxByUser($user){
+        $sql = "DELETE FROM messageBox_adm WHERE user_id = :user";
+        $qry = $this->db->prepare($sql);
+        $qry->bindValue(":user",$user);
+        $qry->execute();
+        return true;
+    }
+    public function userBan($user){
+        if(!is_numeric($user) && is_string($user)) $user = $this->getUserIdByName($user);
+        if(is_object($user)) $user = $user->user_id;
+
+        $email = selectOnceEqual($this->db,"user_email","user","user_id",$user,1);
+        $email = $email->user_email;
+
+        $banned = $this->isBanned($user);
+        if($banned) return "banned";
+        
+
+        updateOnceById($this->db,"user","user_ban",1,"user_id",$user);
+        if(insertDefault($this->db,"users_baned",["user_id","user_email"],[$user,$email])){
+            $this->deleteAllCommentsByUser($user);
+            $this->deleteAllFollowingByUser($user);
+            $this->deleteAllLikesByUser($user);
+            $this->deleteBoxAdmByUser($user);
+            $this->deleteAllImagesByUser($user);
+            return true;
+        }
+        else return false;
+      
+    }
+    public function removerBan($user){
+        if(!is_numeric($user) && is_string($user)) $user = $this->getUserIdByName($user);
+        if(is_object($user)) $user = $user->user_id;
+
+        if($this->isBanned($user)){
+            updateOnceById($this->db,"user","user_ban",0,"user_id",$user);
+            deleteById($this->db,"users_baned","user_id",$user);
+            
+            $this->isBanned($user);
+            return true;
+        }else return false;
+    }
+
 }
 ?>

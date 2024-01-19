@@ -73,6 +73,10 @@ class ProfileController extends Controller{
    public function follow($user){
     $objUser        = new User;
     if(!isset($_SESSION)) session_start();
+    if($objUser->isBanned($_SESSION["user_id"])){
+        header("location: ".URL_BASE."profile/?user=$user");
+        exit;
+    }
 
     if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
 
@@ -103,7 +107,11 @@ class ProfileController extends Controller{
     //if(!$objUser->userIsFollowing($user,$_SESSION["user_id"])) header("location: ".URL_BASE."profile/?user=$user");
     @session_start();
     if($user == $_SESSION["user_id"]) header("location: ".URL_BASE);
-    
+    if($objUser->isBanned($_SESSION["user_id"])){
+        header("location: ".URL_BASE."profile/?user=$user");
+        exit;
+    }
+
     $unfollow = $objUser->unFollow($user,$_SESSION["user_id"]);
     
     if($unfollow) header("location: ".URL_BASE."profile/?user=$user");

@@ -1,3 +1,4 @@
+<?php if(isset($banned)) echo "<script>alert('Voce foi banido ! segue o que voce nao pode fazer : \n salve')</script>";?>
 <div class="titulo-mobile">
       <h1 class="titulo-m styleb-text-center styleb-mt-3">Tudo</h1>
     </div>

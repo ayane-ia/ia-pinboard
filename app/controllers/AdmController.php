@@ -30,6 +30,9 @@ class AdmController extends Controller{
       if(!$objAdm->verifyAdm($_SESSION["adm"])) header("location: ".URL_BASE);
       $objUser->updateFollowing($_SESSION["adm"]->adm_id);
       $data["users"] = $objUser->getUsers();
+      foreach($data["users"] as $usr){
+         $objUser->isBanned($usr->user_id);
+      }
 
       $data["view"]  = "adm/listausuarios";
       $this->load("adm/template",$data);
@@ -87,12 +90,11 @@ class AdmController extends Controller{
       if($objUser->deleteUser($id, $_SESSION["adm"])) header("location: ".URL_BASE."adm/users/$admId");
       else header("location: ".URL_BASE);
    }
-   public function nachrichtSenden(){
+   public function nachrichtSenden($user_id = false){
       $objImagem = new Imagem;
       $objUser   = new User;
       $objAdm    = new Adm;
       $objBox    = new Box;
-     
 
 
       if(!isset($_SESSION)) session_start();
@@ -104,7 +106,7 @@ class AdmController extends Controller{
       if(isset($_GET) && isset($_GET["ilete"])){
          if($objBox->deleteMessage($_GET["ilete"])) header("location: ".URL_BASE."adm/nachrichtSenden");
       }
-
+      $data["user_id"]  = $user_id;
       //$data["messages"] = $objBox->getMessageByAdmId($_SESSION["adm"]);
       if(isset($_POST) && isset($_POST["content"]) && isset($_POST["user"])){
          $conteudo = $_POST["content"];
@@ -125,9 +127,39 @@ class AdmController extends Controller{
 
       $data["messages"] = $objBox->getMessageByAdmId($id);
       $data["users"]    = $objUser->getUsers();
-      
+
       $data["view"] = "adm/box";
 
       $this->load("adm/template",$data);
+   }
+   public function tomarisBan($user_id){
+      $objImagem = new Imagem;
+      $objUser   = new User;
+      $objAdm    = new Adm;
+      $objBox    = new Box;
+
+
+      if(!isset($_SESSION)) session_start();
+      if(!isset($_SESSION["adm"]) && !isset($_SESSION["adm"]->adm_id)) header("location: ".URL_BASE);
+      $id = $_SESSION["adm"]->adm_id;
+      
+      if($objUser->userBan($user_id)) header("location: ".URL_BASE."adm/users/$id");
+      else die("Houve um erro ao banir o user, clique <a href=".URL_BASE."adm/users/$id".">Aqui para voltar </a> ");
+   }
+   public function removeBan($user_id){
+      $objImagem = new Imagem;
+      $objUser   = new User;
+      $objAdm    = new Adm;
+      $objBox    = new Box;
+
+
+      if(!isset($_SESSION)) session_start();
+      if(!isset($_SESSION["adm"]) && !isset($_SESSION["adm"]->adm_id)) header("location: ".URL_BASE);
+      $id = $_SESSION["adm"]->adm_id;
+      if(!$objUser->isBanned($user_id)) header("location: ".URL_BASE."adm/users/$id");
+
+      if($objUser->removerBan($user_id)) header("location: ".URL_BASE."adm/users/$id");
+      else die("Houve um erro ao banir o user, clique <a href=".URL_BASE."adm/users/$id".">Aqui para voltar </a> ");
+
    }
 }
