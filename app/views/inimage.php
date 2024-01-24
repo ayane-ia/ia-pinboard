@@ -9,7 +9,7 @@ if(isset($error) && isset($error["notLogged"])){ ?>
 
       <div class="sobre-img">
         <?php if(isset($remove)) { ?>
-          <a href="<?php echo URL_BASE."image/nelixremm/$image->image_id"?>">Excluir Imagem</a>
+          <a class="btns002 margin-auto" href="<?php echo URL_BASE."image/nelixremm/$image->image_id"?>" title="Não tem como restaura a imagem depois!">Excluir Imagem <i class="fa-regular fa-circle-xmark"></i></a>
         <?php } ?>
         <h1 class="titulo-img"><?php echo $image->image_title?></h1>
 
@@ -68,7 +68,7 @@ if(isset($error) && isset($error["notLogged"])){ ?>
       
           <?php }elseif(!$following || $following == false) {  ?> <!--Se o user nao estiver seguindo o user do perfil que postou a foto-->
             <a href="<?php echo URL_BASE?>image/follow/<?php echo $image->image_authorId?>/<?php echo $image->image_id?>">
-              <button class="btns005">Seguir</button>
+              <button class="reset font"><i class="fa-solid fa-user-plus icon-menus-avatar"></i></button>
             </a>
           <?php }?>
 

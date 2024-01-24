@@ -43,7 +43,7 @@ class UserController extends Controller{
          $image   = $_FILES["image_file"];
          $title   = $_POST["image_title"];
          $userId  = $_SESSION["user_id"];
-         $ctg     = $_POST["image_category"];
+         if(!$_POST["image_category"] || $_POST["image_category"] == "default"){$ctg = 10;}else $ctg = $_POST["image_category"];
          $desc    = $_POST["image_description"];
          $verify  = $objImagem->verifyImage($image,$userId);
          if(!is_string($verify)){

@@ -19,7 +19,12 @@ class CadastroController extends Controller{
                     $url = URL_BASE."login";
                     header("location: $url");
                 }
-                else{
+                else
+                {
+                    echo getcwd().'<br>';
+                    echo dirname(__FILE__).'<br>';
+                    echo basename(__DIR__).'<br>';
+                    
                     die("erro in db <a href=".URL_BASE.">Voltar ? </a>");
                 }
             }
