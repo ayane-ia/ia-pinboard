@@ -1,0 +1,1 @@
+let scrollnone = document.querySelector('body').style.overflow = 'hidden';
