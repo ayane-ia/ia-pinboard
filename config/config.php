@@ -1,9 +1,9 @@
 <?php
 
 define("SERVIDOR", "localhost");
-define("BANCO", "u574518560_iapinboard");
-define("USUARIO", "u574518560_ayron");
-define("SENHA", 'lStoB2+V5c');
+define("BANCO", "iapinboard");
+define("USUARIO", "root");
+define("SENHA", '');
 
 
 define('CONTROLLER_PADRAO', 'home');
@@ -12,4 +12,4 @@ define('NAMESPACE_CONTROLLER', 'app\\controllers\\');
 
 define('URL_BASE', 'http://ia-pinboard.shop/');
 define('USER_PATH', 'C:\xampp\htdocs\projetos\ia-pinboard\userData\\');
-define('PATH_BASE', '/home/u574518560/domains/ia-pinboard.shop/public_html/');
+define('PATH_BASE', 'C:\xampp\htdocs\projetos\ia-pinboard\\');
