@@ -11,5 +11,5 @@ define('METODO_PADRAO', 'index');
 define('NAMESPACE_CONTROLLER', 'app\\controllers\\');
 
 define('URL_BASE', 'http://ia-pinboard.shop/');
-define('USER_PATH', '/home/u574518560/domains/ia-pinboard.shop/public_html/userData/');
+define('USER_PATH', 'C:\xampp\htdocs\projetos\ia-pinboard\userData\\');
 define('PATH_BASE', '/home/u574518560/domains/ia-pinboard.shop/public_html/');
