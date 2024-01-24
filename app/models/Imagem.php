@@ -9,7 +9,10 @@ class Imagem extends Model{
         return $lista;
     }
     public function getAllImages(){
-        return selectAll($this->db, "images", 1);
+        $sql = "SELECT * FROM images ORDER BY image_likes DESC";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_OBJ);
     }
     public function getNumberOfImages($id){
         $sql    = "SELECT COUNT(image_id) as temp FROM images WHERE image_authorId = $id";
@@ -176,7 +179,11 @@ class Imagem extends Model{
         elseif($user_id == false || $user_id == null) die("fatal error <a href=".URL_BASE.">Voltar a home?</a>");
         if(!$this->isImage($image_id)) return false;
 
+        
         insertDefault($this->db,"likes",["image","user"],[$image_id,$user_id]);
+        $temp = countAll($this->db,"likes","*","image",$image_id);
+        
+        updateOnceById($this->db,"images","image_likes",$temp,"image_id",$image_id);
         return true;
 
     }
@@ -205,6 +212,9 @@ class Imagem extends Model{
 
         if($this->isLike($imageId, $user_id) || $this->isLike($imageId, $user_id) == null){
             deleteById_twoEquals($this->db,"likes","image","user",$imageId,$user_id);
+            $temp = countAll($this->db,"likes","*","image",$imageId);
+        
+            updateOnceById($this->db,"images","image_likes",$temp,"image_id",$imageId);
             return true;
         }else return false;
     

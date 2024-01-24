@@ -1,0 +1,127 @@
+#erro-tela {
+    display: none;
+}
+
+
+.container-componentes {
+    display: flex;
+  
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.logo-do-site {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.logo-do-site a img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+/*Menu vestical*/
+
+.menu-vestical {
+    width: 10%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+
+.liste-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: calc(100vh - 68px);
+}
+
+.link-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-menu {
+    width: 40px;
+}
+
+.icon-menu:hover {
+    transform: scale(1.1);
+}
+
+.content-conteudo {
+    width: 80%;
+    margin-left: 20%;
+    padding: 20px;
+    
+}
+
+
+/*Conteudo adm*/
+
+
+.titulo-bemvindo-div {
+    width: 100%;
+}
+
+.bem-vindos {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.img-adm {
+    width: 400px;
+    display: block;
+    margin: 30px auto;
+    border-radius: 50%;
+}
+
+
+  /*Usuarios lista*/
+
+  .button-edit {
+    border: none;
+    cursor: pointer;
+    background: none;
+  }
+
+  .button-edit:hover {
+    transform: scale(1.1);
+  }
+
+  .img-botao-tabela {
+    width: 60px;
+    margin-left: 5px;
+  }
+
+  /*conteudo*/
+
+  .scimg-section-container {
+    border-radius: 10px;
+    
+  }
+
+  @media screen and (max-width: 490px) {
+    #erro-tela {
+        display: block;
+    }
+    .container-componentes {
+        display: none;
+      
+    }
+  }

@@ -99,7 +99,7 @@
   
   #image-preview img {
     border-radius: 10px;
-    max-width: 80%;
+    max-width: 300px;
     max-height: 300px;
   }
 
@@ -174,7 +174,7 @@
 @media screen and (max-width: 340px) {
 
   .container {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
   }
 
   .titulo-upload {

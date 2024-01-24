@@ -52,7 +52,7 @@
         <option value="<?php echo $ct->category_id;?>"><?php echo $ct->category_name;?></option>
 
         <?php }}?>
-        <option value="null" selected >Escolha</option>
+        <option value="default" selected >Escolha</option>
         </select>
       </div>
       <div>
