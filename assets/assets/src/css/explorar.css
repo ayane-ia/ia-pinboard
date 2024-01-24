@@ -1,0 +1,82 @@
+.container-conteudo {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.container-filho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: auto;
+    height: 500px;
+}
+
+
+.card-link {
+    text-decoration: none;
+    filter: drop-shadow(0px 0px 10px rgba(99, 98, 98, 0.5));
+}
+
+.card {
+    width: 200px;
+    height: 140px;
+    border-radius: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fundo-0 {
+    background-image: url('../../images/paisagens/paisagens23.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.card h2 {
+    background-color: rgba(0, 0, 0, 0.384);
+    filter: drop-shadow(0px 0px 10px rgba(99, 98, 98, 0.5));
+    border-radius: 10px;
+}
+
+
+@media screen and (max-width: 800px) {
+    .container-conteudo {
+        width: 100%;
+        height: calc(100vh);
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+       
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .container-filho {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .container-filho {
+        flex-direction: column;
+        margin-bottom: 70px;
+    }
+
+
+    .card {
+        width: 150px;
+        height: 100px;
+    }
+
+}
