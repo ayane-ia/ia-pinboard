@@ -11,6 +11,14 @@ class Adm extends Model{
 
         $columns    = ["adm_name", "adm_email", "adm_password"];
         $values     = [$admName, $email, $pswd];
+
+        $users = selectAll($this->db,"user",1);
+        foreach($users as $u){
+            if($email == $u->user_email){
+                return "exists";
+            } 
+        }
+
         $insert     = insertDefault($this->db, "adm",$columns, $values);
         if($insert){
             $temp = selectOnceEqual($this->db,"*","adm","adm_id",$insert,1);

@@ -17,9 +17,15 @@ class BoxController extends Controller{
       if(!isset($_SESSION)) session_start();
       if(!isset($_SESSION["user_id"])) header("location: ".URL_BASE); 
 
-        $data["messages"]     = $objBox->getMessageByUserId($_SESSION["user_id"]);
-        $data["adms"] = $objAdm->getAdm();
+        $messages     = $objBox->getMessageByUserId($_SESSION["user_id"]);
+        $adm = $objAdm->getAdm();
 
+        for ($i=0; $i < count($messages); $i++) { 
+            for ($j=0; $j < count($adm); $j++) { 
+               if($messages[$i]->adm_id == $adm[$j]->adm_id) $messages[$i]->adm_name = $adm[$j]->adm_name;
+            }
+        }
+        $data["messages"] = $messages;
         $data["view"]         = "user_logged/caixa";
         $this->load("template", $data);
    } 

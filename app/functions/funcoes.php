@@ -71,6 +71,12 @@ function selectAll_equal($conn, $table, $column, $value){
     $query->execute();
     return $query->fetchAll(\PDO::FETCH_OBJ);
 }
+function selectAll_equal_desc($conn, $table, $column, $value, $orderColumn){
+    $sql = "SELECT * FROM $table  WHERE $column = $value ORDER BY $orderColumn DESC";
+    $query = $conn->prepare($sql);
+    $query->execute();
+    return $query->fetchAll(\PDO::FETCH_OBJ);
+}
 function selectPerTwoValues_Equals($conn, $table, $column1, $column2, $first_value,$second_value)
 {   // return * values of your table in fetchALL in obj format, if you want return all without condicional, your can insired in $verify_string camp the value -> ""
     $sql = "SELECT * FROM $table WHERE $column1 = :v1 AND $column2 = :v2";

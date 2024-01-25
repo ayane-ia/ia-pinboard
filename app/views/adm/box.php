@@ -17,20 +17,10 @@
 
 <br><hr>
 
-<?php $i = 0; 
-if(isset($messages)) foreach($messages as $msg) { ?>
-<?php 
-for ($j=0; $j < count($users); $j++) { 
-    if($messages[$j]->user_id == $users[$j]->user_id){
-        $user_name = $users[$j]->user_name;
-        continue;
-    }
-}
-?>
-
+<?php foreach($messages as $msg) { ?>
 <div>
     <h2> ID : <?php echo $msg->user_id?> 
-    <span>&nbsp; Nome : <?php echo $user_name?></span>
+    <span>&nbsp; Nome : <?php echo $msg->user_name?></span>
     <span>&nbsp; <?php echo $msg->create_time?></span>
     </h2>
      <p> -> <?php echo $msg->content?></p>
@@ -42,5 +32,5 @@ for ($j=0; $j < count($users); $j++) {
     <br>
 </div>
 
-<?php $i++;} ?>
+<?php }?>
 </div>

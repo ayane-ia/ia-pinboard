@@ -15,6 +15,8 @@
                 
                 <li class="link-menu"><a href="<?php echo URL_BASE?>adm/conteudo/<?php echo $_SESSION["adm"]->adm_id?>" title="ver conteudo"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/imagens.png"  alt=""></a></li>
                 
-                <li class="link-menu"><a href="<?php echo URL_BASE?>adm/nachrichtSenden" title="Adiciona categoria"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/botao-adicionar.png"  alt=""></a></li>
+                <li class="link-menu"><a href="<?php echo URL_BASE?>adm/nachrichtSenden" title="Enviar Mensagem"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/botao-adicionar.png"  alt=""></a></li>
+
+                <li class="link-menu"><a href="<?php echo URL_BASE?>adm/signUp" title="Cadastrar ADM"><img class="icon-menu" src="<?php echo URL_BASE."assets/"?>images/recursos/botao-adicionar.png"  alt=""></a></li>
             </ul>
         </div>

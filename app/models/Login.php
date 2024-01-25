@@ -24,9 +24,28 @@ class Login extends Model{
                 if($temp_email[$i] == "#") break;
                 $temp_password[$i] = $temp_email[$i];
             }
+
+           
             if($temp_password == $pswd){ 
-                unset($temp_password,$a,$k,$temp_email);
-                $adm = selectOnceEqual($this->db, "*","adm","adm_password",$pswd,1);
+                unset($temp_password,$a,$k);
+
+                $_temp = [];
+                $temp3 = 0;
+                for ($i=0; $i < count($temp_email); $i++) { 
+                    if($temp_email[$i] == "#") continue;
+                    if(str_contains($temp_email[$i],"n")){
+                        $temp3 = $i + 3; break;
+                    }
+                }
+                for ($i = $temp3; $i < count($temp_email); $i++) { 
+                    $_temp[$i] = $temp_email[$i];
+                }
+            
+                $_temp = implode("",$_temp);
+                $temp_email = [];  
+
+                $adm = selectOnceEqual($this->db, "*","adm","adm_email",$_temp,1);
+
                 $countCrd = strlen($adm->adm_password); //count_credencial now count the password
                 if($adm != null &&  strlen($pswd) == $countCrd){ 
                     if($email[2 + ($countCrd + 1)] == "#"){
@@ -35,13 +54,17 @@ class Login extends Model{
                             $email[$position + 3] == "d" &&
                             $email[$position + 4] == "m" &&
                             $email[$position + 5] == "i" &&
-                            $email[$position + 6] == "n"){
+                            $email[$position + 6] == "n"
+                            ){
                                 // code
                                 if($email[$position + 7] == "#" && $email[$position + 8] == "#"){
-                                    for($i = $position + 9; $i < (strlen($email)); $i++){
-                                        $temp_email[$i] = $email[$i];
+                                    //die($email);
+                                    for($j = $position + 9; $j < (strlen($email)); $j++){
+                                        //die($email[$j]);
+                                        $temp_email[$j] = $email[$j];
                                     }
                                     $temp_email = implode("",$temp_email);
+                                    
                                     if($temp_email == $adm->adm_email){
                                         $temp_values = selectOnceEqual($this->db,"adm_id","adm","adm_email",$temp_email,1);
                                         return $temp_values->adm_id;
@@ -60,8 +83,9 @@ class Login extends Model{
         $clmns = ["user_email", "user_password"];
         if (Login_model($this->db,"user",$clmns,$email,$pswd)) return true;
         else {
-            
+             
             $adm = $this->loginAdm($email,$pswd);
+            
             if(!$adm) return false;
 
             $temp =  selectOnceEqual($this->db,"*","adm","adm_id",$adm,1);

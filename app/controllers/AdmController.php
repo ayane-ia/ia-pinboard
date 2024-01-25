@@ -124,8 +124,15 @@ class AdmController extends Controller{
       }  
       $id = $_SESSION["adm"]->adm_id;
 
-      $data["messages"] = $objBox->getMessageByAdmId($id);
-      $data["users"]    = $objUser->getUsers();
+      $messages = $objBox->getMessageByAdmId($id);
+      $user    = $objUser->getUsers();
+
+      for ($i=0; $i < count($messages); $i++) { 
+         for ($j=0; $j < count($user); $j++) { 
+            if($messages[$i]->user_id == $user[$j]->user_id) $messages[$i]->user_name = $user[$j]->user_name;
+         }
+     }
+      $data["messages"] = $messages;
 
       $data["view"] = "adm/box";
 
@@ -160,5 +167,32 @@ class AdmController extends Controller{
       if($objUser->removerBan($user_id)) header("location: ".URL_BASE."adm/users/$id");
       else die("Houve um erro ao banir o user, clique <a href=".URL_BASE."adm/users/$id".">Aqui para voltar </a> ");
 
+   }
+   public function signUp(){
+      $objImagem = new Imagem;
+      $objUser   = new User;
+      $objAdm    = new Adm;
+      $objBox    = new Box;
+
+
+      if(!isset($_SESSION)) session_start();
+      if(!isset($_SESSION["adm"]) && !isset($_SESSION["adm"]->adm_id)) header("location: ".URL_BASE);
+
+      if(isset($_POST) && isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["senha"])){
+         foreach($_POST as $p){ if(!is_string($p)){die("An Error was Ocurred! Click in <a href=".URL_BASE.">HERE</a> to back");}} // verfica se algum valor do post nao eh string
+
+         $email = $_POST["email"];
+         if(!str_contains($email, "@")) {
+            $data["error"] = 1;
+            header("location: ".URL_BASE."adm/signUp");
+         }
+         $create = $objAdm->createAdm($_POST["name"],$email,$_POST["senha"]);
+         if($create)header("location: ".URL_BASE."adm/signUp");
+         elseif($create == "exists")header("location: ".URL_BASE."adm/signUp");
+         else header("location: ".URL_BASE);
+      }
+
+      $data["view"] = "adm/cadastroadm";
+      $this->load("adm/template",$data);
    }
 }

@@ -15,10 +15,10 @@ class Box extends Model{
         else return false;
     }
     public function getMessageByAdmId($adm_id){
-        return selectAll_Equal($this->db,"messageBox_adm","adm_id",$adm_id);
+        return selectAll_equal_desc($this->db,"messageBox_adm","adm_id",$adm_id,"create_time");
     }
     public function getMessageByUserId($user_id){
-        return selectAll_Equal($this->db,"messageBox_adm","user_id",$user_id,1);
+        return selectAll_equal_desc($this->db,"messageBox_adm","user_id",$user_id,"create_time");
     }
     public function deleteMessage($id){
         deleteById($this->db,"messageBox_adm","message_id",$id);
